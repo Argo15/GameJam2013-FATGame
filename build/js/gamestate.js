@@ -275,6 +275,7 @@ var gamestate = (function(){
 
 	return{
 		init:init,
+		setInput:setInput,
 		update:update
 	}
 
