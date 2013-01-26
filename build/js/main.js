@@ -9,11 +9,14 @@ var main = (function(){
 
 
 	var player,
+		metronomeArrow,
 		groundObject;
 		
 	var gravity = 10,
 		speed = 5;
-		
+	
+	var metronomeDirection = 1;
+	
 	var KEY = {
 		A:65,
 		F:70,
@@ -22,7 +25,7 @@ var main = (function(){
 	
 	//Game Variables
 	var heartRate = 50,
-		threshold = 10,
+		threshold = 15,
 		angle = 45,
 		angleMode = "increase";
 	
@@ -107,6 +110,31 @@ var main = (function(){
 
 	      player.onGround = false;
 
+		// add metronome.
+		var metronomeBackgroundImg = new Image();
+		metronomeBackgroundImg.src = "./images/fatmeter.png";
+		var metronomeBackground = new Kinetic.Image({
+          x: 5,
+          y: 0,
+          image: metronomeBackgroundImg,
+          width: 200,
+          height: 200
+        });
+        
+        var metronomeArrowImg = new Image();
+        metronomeArrowImg.src = "./images/arrow4.png";
+        metronomeArrow = new Kinetic.Image({
+        	x: 108,
+        	y: 195,
+        	image: metronomeArrowImg,
+        	width: 74,
+        	height: 100
+        });
+        metronomeArrow.rotate(190 * (Math.PI/180));
+		
+		guiLayer.add(metronomeBackground);
+		guiLayer.add(metronomeArrow);
+
 	      gameLayer.add(player);
 	      groundLayer.add(groundObject);
 	      stage.add(background.drawBackground()[0]);
@@ -138,17 +166,20 @@ var main = (function(){
 			angle += .5;
 			if(angle >= 90){
 				angleMode = "decrease";
+				metronomeDirection = -1;
 			}
 		}
 		
 		if(angleMode == "decrease"){
 			angle -= .5;
-			if(angle <= 0){
+			if(angle <= 45){
 				angleMode = "increase";
+				metronomeDirection = 1;
 			}
 		}
 		
 		gui.setHeartRate(heartRate);
+		metronomeArrow.rotate(.5 * (Math.PI/180) * metronomeDirection);
 	}
 	
 	function moveScreen(){
@@ -166,10 +197,12 @@ var main = (function(){
 	
 	
 	function setInput(input){
-		if(input == KEY.A){
-			//Left Foot
-			playerClass.operateMovement("left");
-			if(angle < threshold){
+		if(input == KEY.F){
+			//Right Foot
+			playerClass.operateMovement("right");
+			console.log(angle);
+			console.log(90 - threshold);
+			if((angle - 45) < threshold){
 				console.log("GOODHIT")
 				speed += 1;
 				heartRate += 10;
@@ -179,10 +212,12 @@ var main = (function(){
 				heartRate -= 10;
 			}
 			
-		} else if(input == KEY.F){
-			//Right Foot
-			playerClass.operateMovement("right");
-			if(angle > (90 - threshold)){
+		} else if(input == KEY.A){
+			//Left Foot
+			playerClass.operateMovement("left");
+			console.log(angle - 45);
+			console.log(threshold);
+			if((threshold < (angle - 45)) && ((angle - 45) < (threshold * 2))){
 				console.log("GOODHIT")
 				speed += 1;
 				heartRate += 10;
