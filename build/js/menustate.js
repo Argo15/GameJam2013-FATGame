@@ -37,13 +37,25 @@ var menustate = (function()
 	
 	function addButtons()
 	{
-	    var startButton = new Kinetic.Rect({
+	    var startButton = new Kinetic.Text({
+	      	x: 580,
+	        y: 530,
+	        width: 200,
+	        height: 100,
+			text: "Start",
+			fontSize: 60,
+			fontFamily: 'Calibri',
+       		fill: 'black',
+	      });
+	    var startButtonBackground = new Kinetic.Rect({
 	      	x: 540,
 	        y: 510,
 	        width: 200,
 	        height: 100,
-	        fill: 'yellow',
-	      })
+       		fill: 'Yellow',
+	      });
+	      
+	    buttonLayer.add(startButtonBackground);
 	    buttonLayer.add(startButton);
 	    buttonLayer.on('click', function() {
             stage.remove();
