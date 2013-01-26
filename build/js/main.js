@@ -4,7 +4,8 @@ var main = (function(){
 	var gameLayer,
 		groundLayer,
 		skyLayer,
-		cloudLayer;
+		cloudLayer,
+		guiLayer;
 
 
 	var player,
@@ -33,7 +34,12 @@ var main = (function(){
 		addBackground();
 		addGround();
 		addGameElements();
+		addGui();
 		startLoop();
+	}
+	
+	function addGui(){
+		gui.drawGui();
 	}
 
 	function createStage(){
@@ -47,6 +53,7 @@ var main = (function(){
 		groundLayer = new Kinetic.Layer();
 		skyLayer = new Kinetic.Layer();
 		cloudLayer = new Kinetic.Layer();
+		guiLayer = new Kinetic.Layer();
 
 	}
 
@@ -101,6 +108,7 @@ var main = (function(){
 	      groundLayer.add(groundObject);
 	      stage.add(gameLayer);
 	      stage.add(groundLayer);
+	      stage.add(guiLayer);
 	}
 
 	function startLoop(){
@@ -167,8 +175,10 @@ var main = (function(){
 			playerClass.operateMovement("left");
 			if(angle < threshold){
 				console.log("GOODHIT")
+				speed += 1;
 			} else {
-				console.log("BAD")
+				console.log("BAD");
+				speed -= 1;
 			}
 			
 		} else if(input == KEY.F){
@@ -176,14 +186,20 @@ var main = (function(){
 			playerClass.operateMovement("right");
 			if(angle > (90 - threshold)){
 				console.log("GOODHIT")
+				speed += 1;
 			} else {
-				console.log("BAD")
+				console.log("BAD");
+				speed -= 1;
 			}
 			
 		} else if(input == KEY.T){
 			//Breath
 			playerClass.operateBreathing();
 			
+		}
+		
+		if(speed < 1){
+			speed = 1;
 		}
 	}
 	
