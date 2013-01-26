@@ -29,13 +29,24 @@ var main = (function(){
 		gameLayer = new Kinetic.Layer();
 		groundLayer = new Kinetic.Layer();
 		
-	    player = new Kinetic.Rect({
+		var playerImage = new Image();
+		playerImage.src = "./images/bill.png";
+	    player = new Kinetic.Sprite({
 	        x: 239,
 	        y: 175,
-	        width: 60,
-	        height: 100,
-	        fill: 'pink',
+	        offset: {x:256, y:256},
+	        image: playerImage,
+	        animation:'walking',
+	        animations: playerClass.setupAnimations(),
+	        frameRate: 5
 	      });
+	      player.setScale(-1, 1);
+	      
+	      //Start Player Animation
+	      playerImage.onload= function(){
+	      	player.start();
+	      }
+	      
 	      
 	      ground = new Kinetic.Rect({
 	      	x: 0,
@@ -50,7 +61,7 @@ var main = (function(){
 	      console.log(player.onGround);
 	      
 	      gameLayer.add(player);
-	       groundLayer.add(ground);
+	      groundLayer.add(ground);
 	      stage.add(gameLayer);
 	      stage.add(groundLayer);
 	      
