@@ -52,6 +52,7 @@ var gamestate = (function(){
     var missed = true;
 
 	function init(){
+		$("#heartAttack").css("opacity", "0");
 		deathCalled = false;
 		$("#howToPlayButton").css("display", "none");
 		mySnd = new buzz.sound("./sounds/runningsong", {
@@ -464,7 +465,10 @@ var gamestate = (function(){
 			 speed = 0;
 			deathCalled = true;
 			player.setOpacity(0);
-			
+			if(playerHat){
+				playerHat.setOpacity(0);
+			}
+			$("#heartAttack").css("opacity", "1");
 			
 			var anims = {
 				dead: [{
@@ -518,6 +522,7 @@ var gamestate = (function(){
 				 heartRate = 00;
 				 angleInc = 1;
 				 speed = 0;
+				 $("#heartAttack").css("opacity", "0");
 			 	 stage.remove();
 		         currentstate = scorestate;
 		         currentstate.init(gui.getCalories());
