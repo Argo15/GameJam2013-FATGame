@@ -29,15 +29,6 @@ var menustate = (function()
 	
 	function addBackground()
 	{
-/*
-	    var backgroundObject = new Kinetic.Rect({
-	      	x: 0,
-	        y: 0,
-	        width: 1280,
-	        height: 720,
-	        fill: 'purple',
-	      })
-*/
 	      background.setStage(stage);
 		  var skyLayer = background.drawBackground()[0];
 	      stage.add(skyLayer);
@@ -65,25 +56,20 @@ var menustate = (function()
 	
 	function addButtons()
 	{
-	    var startButton = new Kinetic.Text({
-	      	x: 580,
-	        y: 530,
-	        width: 200,
-	        height: 100,
-			text: "Start",
-			fontSize: 60,
-			fontFamily: 'Calibri',
-       		fill: 'black',
-	      });
-	    var startButtonBackground = new Kinetic.Rect({
-	      	x: 540,
-	        y: 510,
-	        width: 200,
-	        height: 100,
-       		fill: 'Yellow'
-	      });
+	   var startImg = new Image();
+	   startImg.src = "./images/startbutton.png";
+	   var startButton = new Kinetic.Image({
+			x: stage.getWidth()/2,
+			y: 375,
+			image: startImg,
+			width: 500,
+			height: 250,
+		});
+		
+		startButton.setOffset({
+      		x: startButton.getWidth() / 2
+      	});
 	      
-	    buttonLayer.add(startButtonBackground);
 	    buttonLayer.add(startButton);
 	    buttonLayer.on('click', function() {
             stage.remove();
