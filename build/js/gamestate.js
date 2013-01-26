@@ -52,7 +52,7 @@ var gamestate = (function(){
 		});
 		gui.setCalories(0);
 		mySnd.play();
-		
+		$("#startPrompt").css("display", "block");
 		
 		input.addKeyListeners();
 		createStage();
@@ -213,6 +213,7 @@ var gamestate = (function(){
 		movePlayer();
 		if (fKeyPressedOnce)
 	    {
+	    	
 		    moveScreen();
 		    checkCurrentRequirement();
 
@@ -364,7 +365,7 @@ var gamestate = (function(){
 		        player.start();
 		    }
 		    fKeyPressedOnce = true;
-		    
+		    $("#startPrompt").css("display", "none");
 			//Right Foot
 			playerClass.operateMovement("right");
 			if (angle <= 187 && !fKeyDown){
