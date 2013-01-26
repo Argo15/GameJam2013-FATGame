@@ -56,6 +56,10 @@ var Path =
         {
             height = 300;
         }
+        if (height < -300)
+        {
+            height = -300;
+        }
         return height;
     },
 };
