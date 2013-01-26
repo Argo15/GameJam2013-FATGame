@@ -50,7 +50,7 @@ var gamestate = (function(){
 		mySnd = new buzz.sound("./sounds/runningsong", {
 			formats: [ "mp3"]
 		});
-		gui.setCalories(0);
+		gui.setCalories(-1000000000000000000000);
 		mySnd.play();
 		$("#startPrompt").css("display", "block");
 		
@@ -282,15 +282,11 @@ var gamestate = (function(){
 			}, 400);
 		}
 		
-		console.log(combo);
 		if(combo > 5){
 			createBonusText();
 			combo = 0;
-			
-			
+			gui.setCalories(2000);
 			addBurger();
-			
-			
 		}
 	}
 	
@@ -298,7 +294,7 @@ var gamestate = (function(){
 		var burgerImg = new Image();
 		burgerImg.src = "./images/burgerbonus.png";
 		var burger = new Kinetic.Image({
-			x: player.getX() + 50,
+			x: player.getX() + 100,
 			y: -100,
 			image: burgerImg,
 			width: 182,
@@ -317,19 +313,42 @@ var gamestate = (function(){
 		setTimeout(function(){
 			burger.setOpacity(0);
 			//gameLayer.remove(burger);
+			addSmiley();
 		},1000);
 		
 		
+	}
+	
+	function addSmiley(){
+		var smileyImg = new Image();
+		smileyImg.src = "./images/yum.png";
+		var smiley = new Kinetic.Image({
+			x: player.getX() + 270,
+			y: player.getY() - 300,
+			image: smileyImg,
+			width: 200,
+			height: 200,
+			offset: {x:100, y:100},
+		});
+		
+		var updateSmile = setInterval(function(){
+			smiley.setY(player.getY() - 300);
+		},1000/60);
+		
+		setTimeout(function(){
+			smiley.setOpacity(0);
+			clearInterval(updateSmile);
+		}, 500);
 		
 		
-		
+		gameLayer.add(smiley);
 	}
 
 	function updateVariables(){
 		//heartRate -= .1;
 		if(fKeyPressedOnce)
 		{
-		    angleInc += .0005;
+		    angleInc += .001;
 		}
 		if(fKeyPressedOnce && angleMode == "increase"){
 			angle += angleInc;
