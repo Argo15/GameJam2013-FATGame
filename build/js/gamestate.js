@@ -258,7 +258,7 @@ var gamestate = (function(){
         else
         {
         	//mySnd.stop();
-            stage.remove();
+            //stage.remove();
             //currentstate.init();
         }
 	}
