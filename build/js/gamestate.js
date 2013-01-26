@@ -181,7 +181,7 @@ var gamestate = (function(){
 		var metronomeBackgroundImg = new Image();
 		metronomeBackgroundImg.src = "./images/fatmeter.png";
 		var metronomeBackground = new Kinetic.Image({
-          x: 5,
+          x: 520,
           y: 0,
           image: metronomeBackgroundImg,
           width: 200,
@@ -191,7 +191,7 @@ var gamestate = (function(){
         var metronomeArrowImg = new Image();
         metronomeArrowImg.src = "./images/arrow.png";
         metronomeArrow = new Kinetic.Image({
-        	x: 108,
+        	x: 623,
         	y: 199,
         	image: metronomeArrowImg,
         	width: 74,
