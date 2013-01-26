@@ -160,7 +160,7 @@ var gui = (function(){
 			amt = 2;
 			//console.log("GAME IS OVER");
 		}
-		calories += amt/1000;
+		//calories += amt/1000;
 		calsBurnedText.setText(Math.ceil(calories));
 		//heartBar.setWidth(amt*2);
 		heartText.setText((Math.ceil(amt)) + " BPM");
@@ -170,8 +170,16 @@ var gui = (function(){
 	    return calories;
 	}
 	
+	function setCalories(cals){
+		calories += cals;
+		if(calories < 0){
+			calories = 0;
+		}
+	}
+	
 	return{
 		drawGui:drawGui,
+		setCalories:setCalories,
 		setHeartRate:setHeartRate,
 		getCalories:getCalories,
 	}

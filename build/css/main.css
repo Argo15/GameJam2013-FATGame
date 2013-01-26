@@ -1,3 +1,7 @@
+body{
+	overflow:hidden;
+}
+
 #overlayUI{
 	display:none;
 	position:absolute;
@@ -39,6 +43,49 @@
 	left:1095px;
 }
 
+
+#howToPlayButton{
+	position:absolute;
+	cursor:pointer;
+	width:41px;
+	height:81px;
+	
+	top:640px;
+	left:1200px;
+	
+	background:url('../images/helpBtn.png');
+	background-size:100% 100%;
+}
+
+#howToPlayScreen{
+	display:none;
+	position:absolute;
+	cursor:pointer;
+	width:512px;
+	height:512px;
+	
+	top:100px;
+	left:50%;
+	margin-left:-290px;
+	
+	background:url('../images/tutorial.png');
+	background-size:100% 100%;
+}
+
+
+#shadowBox{
+	display:none;
+	position:absolute;
+	
+	top:0;
+	left:0;
+	
+	background: rgba(0,0,0,.5);
+	
+	width:100%;
+	height:10000px;
+}
+
 #helpButton{
 	position:absolute;
 	cursor:pointer;
@@ -71,4 +118,39 @@
     display:none;
     left:384px;
     top:104px;
+}
+
+
+.goodItem{
+	/* -- transition is the magic sauce for animation -- */
+	-o-transition: all .4s ease-in-out;
+	-ms-transition: all .4s ease-in-out;
+	-moz-transition: all .4s ease-in-out;
+	-webkit-transition: all .4s ease-in-out;
+	position: absolute;
+	width: 400px;
+	height: 200px;
+	top: 200px;
+	left: 50%;
+	margin-left: -250px;
+	background: url("../images/sandwich_win.png");
+	background-size: 100% 100%;
+	
+}
+
+.badItem{
+	/* -- transition is the magic sauce for animation -- */
+	-o-transition: all .4s ease-in-out;
+	-ms-transition: all .4s ease-in-out;
+	-moz-transition: all .4s ease-in-out;
+	-webkit-transition: all .4s ease-in-out;
+	position: absolute;
+	width: 400px;
+	height: 200px;
+	top: 200px;
+	left: 50%;
+	margin-left: -250px;
+	background: url("../images/pillslose.png");
+	background-size: 100% 100%;
+	
 }
