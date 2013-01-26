@@ -15,11 +15,11 @@ var main = (function(){
 		$("#shadowBox").bind("click", function(){
 			$("#howToPlayScreen").css("display", "none")
 			$("#shadowBox").css("display", "none");
-		
 		});
 	}
 	
 	function startLoop(){
+		
 		 setInterval(function(){
 	      	currentstate.update();
 	      },1000/60);

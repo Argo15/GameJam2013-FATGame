@@ -43,7 +43,7 @@ var gamestate = (function(){
     var missed = true;
 
 	function init(){
-		
+		$("#howToPlayButton").css("display", "none");
 		mySnd = new buzz.sound("./sounds/runningsong", {
 			formats: [ "mp3"]
 		});
@@ -67,6 +67,36 @@ var gamestate = (function(){
 
 	function addGui(){
 		guiLayer = gui.drawGui();
+	}
+	
+	function createGoodText(){
+		var container = $("<div>");
+		var textContainer = $("#textContainer");
+		
+		$(container).addClass("goodItem");
+		
+		gui.setCalories(50);
+		$(textContainer).append(container);
+		
+		
+		setTimeout(function(){
+			$(container).css("top", "0");
+			$(container).css("opacity", "0");
+		}, 200)
+	}
+	
+	function createBadText(){
+		var container = $("<div>");
+		var textContainer = $("#textContainer");
+		
+		$(container).addClass("badItem");
+		
+		gui.setCalories(-50);
+		$(textContainer).append(container);
+		setTimeout(function(){
+			$(container).css("top", "0");
+			$(container).css("opacity", "0");
+		}, 200)
 	}
 
 	function createStage(){
@@ -176,8 +206,10 @@ var gamestate = (function(){
 			setTimeout(function(){
 				if(fKeyDown == false){
 					heartRate += 10;
+					createBadText()
 				} else {
 					missed = false;
+					createGoodText();
 				}
 				fKeyInit = false;
 				fKeyDown = false;
@@ -189,8 +221,10 @@ var gamestate = (function(){
 			setTimeout(function(){
 				if(aKeyDown == false){
 					heartRate += 10;
+					createBadText()
 				} else {
 					missed = false;
+					createGoodText();
 				}
 				aKeyInit = false;
 				aKeyDown = false;
@@ -202,8 +236,10 @@ var gamestate = (function(){
 			setTimeout(function(){
 				if(tKeyDown == false){
 					heartRate += 10;
+					createBadText()
 				} else {
 					missed = false;
+					createGoodText();
 				}
 				console.log("GG UNINSTALL");
 				tKeyInit = false;
