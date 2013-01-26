@@ -21,9 +21,16 @@
 	top:640px;
 	left:1100px;
 	
-	background:url('../images/soundbtn.png');
+	background:url('../images/soundbtn.png') no-repeat;
 	background-size:100% 100%;
 }
+
+#muteButton.soundoff{
+	background:url('../images/soundoffbtn.png') no-repeat;
+	background-size:100% 100%;
+}
+
+
 
 #muteButton:hover{
 	width:113px;

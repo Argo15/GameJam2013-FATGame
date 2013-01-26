@@ -94,10 +94,11 @@ var gui = (function(){
 		$("#muteButton").bind('click', function(){
 			if(muted){
 				muted = false;
-				$("#muteButton").addClass("sound")
+				$("#muteButton").removeClass("soundoff")
 			} else if(!muted){
 				muted = true;
-				$("#muteButton").removeClass("sound")
+				$("#muteButton").addClass("soundoff")
+				
 			}
 			console.log(muted);
 			
