@@ -79,7 +79,7 @@ var gui = (function(){
 			x:850,
 			y:20,
 			image:monitorSrc,
-			animation:'idle',
+			animation:'good',
 			animations: setupAnimations(),
 			frameRate: 7
 		});
@@ -126,19 +126,24 @@ var gui = (function(){
 		return guiLayer;
 	}
 	
+	function setAnim(anim){
+		monitor.setAnimation(anim);
+	}
+	
 	
 	function setupAnimations(){
 		var animations = {
-			idle: getAnimationArray(8)
+			good: getAnimationArray(8, 0),
+			bad: getAnimationArray(8, 4),
 		}
         
         return animations;
 	}
 	
-	function getAnimationArray(maxFrames){
+	function getAnimationArray(maxFrames, offset){
         var frameArray = [];
         for(var frame = 0; frame < maxFrames; frame++){
-            frameArray.push(getAnimationFrame(frame));
+            frameArray.push(getAnimationFrame(frame + offset));
         }
         return frameArray;
     }
@@ -179,6 +184,7 @@ var gui = (function(){
 	
 	return{
 		drawGui:drawGui,
+		setAnim:setAnim,
 		setCalories:setCalories,
 		setHeartRate:setHeartRate,
 		getCalories:getCalories,

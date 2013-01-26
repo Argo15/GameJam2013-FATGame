@@ -22,6 +22,8 @@ var gamestate = (function(){
 		T:84,
 	};
 	
+	var changedAnim = true;
+	
 	var fKeyDown = false;
 	var aKeyDown = false;
 	var tKeyDown = false;
@@ -377,6 +379,15 @@ var gamestate = (function(){
 		if(heartRate < 100){
 			heartRate = 100;
 		}
+		
+		if(heartRate < 200 && !changedAnim){
+			gui.setAnim("good");
+		} 
+		
+		if(heartRate > 200 && !changedAnim){
+			gui.setAnim("bad")
+		}
+		
 	}
 
 	function moveScreen(){
