@@ -5,7 +5,7 @@ var main = (function(){
 		currentstate.init();
 		startLoop();
 	}
-
+	
 	function startLoop(){
 		 setInterval(function(){
 	      	currentstate.update();
