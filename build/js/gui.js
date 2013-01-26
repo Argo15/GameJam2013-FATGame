@@ -3,6 +3,8 @@ var gui = (function(){
 	var guiLayer;
 	var heartBar,
 		heartText;
+		
+	var monitor;
 	
 	var calsBurned,
 		calsBurnedTitle;
@@ -41,24 +43,25 @@ var gui = (function(){
        		fill: 'black'
 		})
 		
-		heartBar = new Kinetic.Rect({
-			x:heartRateX,
+		
+		var monitorSrc = new Image();
+		monitorSrc.src="./images/heartbeat.png";
+		
+		monitor = new Kinetic.Sprite({
+			x:900,
 			y:40,
-			width:50,
-			height:20,
-			fill: 'red'
+			image:monitorSrc,
+			animation:'idle',
+			animations: setupAnimations(),
+			frameRate: 2
 		});
 		
-		heartBackground = new Kinetic.Rect({
-			x:heartRateX - 10,
-			y:35,
-			width:205,
-			height:30,
-			fill: 'black'
-		})
 		
-		guiLayer.add(heartBackground);
-		guiLayer.add(heartBar);
+		monitorSrc.onload = function(){
+			guiLayer.add(monitor);
+			monitor.start();
+		}
+			
 		guiLayer.add(calsBurned);
 		guiLayer.add(calsBurnedTitle);
 		guiLayer.add(heartText);
@@ -67,12 +70,40 @@ var gui = (function(){
 	}
 	
 	
+	function setupAnimations(){
+		var animations = {
+			idle: getAnimationArray(8)
+		}
+        
+        return animations;
+	}
+	
+	function getAnimationArray(maxFrames){
+        var frameArray = [];
+        for(var frame = 0; frame < maxFrames; frame++){
+            frameArray.push(getAnimationFrame(frame));
+        }
+        return frameArray;
+    }
+	
+    function getAnimationFrame(frame){
+        var x = (512 * (frame % 2));
+        var y = (256 * Math.floor(frame / 4));
+        return { 
+            x : x,
+            y : y,
+            width : 512,
+            height : 256
+        }
+    }
+	
+	
 	function setHeartRate(amt){
 		if(amt < 1){
 			amt = 1;
 			//console.log("GAME IS OVER");
 		}
-		heartBar.setWidth(amt*2);
+		//heartBar.setWidth(amt*2);
 		heartText.setText((Math.ceil(amt*2)) + " BPM");
 	}
 	
