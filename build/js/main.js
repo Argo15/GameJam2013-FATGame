@@ -51,7 +51,7 @@ var main = (function(){
 
 		gameLayer = new Kinetic.Layer();
 		groundLayer = new Kinetic.Layer();
-		skyLayer = new Kinetic.Layer();
+		
 		cloudLayer = new Kinetic.Layer();
 		guiLayer = new Kinetic.Layer();
 
@@ -60,7 +60,8 @@ var main = (function(){
 	function addBackground(){
 		
 		background.setStage(stage);
-		background.drawBackground();
+		skyLayer = background.drawBackground()[0];
+		console.log(skyLayer);
 		
 	}
 	
@@ -106,6 +107,7 @@ var main = (function(){
 
 	      gameLayer.add(player);
 	      groundLayer.add(groundObject);
+	      stage.add(background.drawBackground()[0]);
 	      stage.add(gameLayer);
 	      stage.add(groundLayer);
 	      stage.add(guiLayer);

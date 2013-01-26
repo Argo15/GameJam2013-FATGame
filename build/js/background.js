@@ -29,9 +29,11 @@ var background = (function(){
                 width: 1280,
                 height: 720
             });
+            
+            layer.add(yoda);
 
 		}
-        layer.add(staticBackground);
+       
         return [layer]; 
 
 	}
