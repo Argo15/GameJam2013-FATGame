@@ -5,20 +5,35 @@ var background = (function(){
 	function drawBackground(){
 		
 		//Change this with sprites or whatever
-		//#yolo
 		var rect = new Kinetic.Rect({
 	        x: 239,
 	        y: 75,
 	        width: 100,
 	        height: 50,
-	        fill: 'green',
+	        fill: 'red',
 	        stroke: 'black',
 	        strokeWidth: 4
 	      });
+
 		
-		
-		return rect;
-		
+		var layer = new Kinetic.Layer();
+
+        var staticBackground = new Image();
+        staticBackground.src = "../media/PNGS/sky3.jpg"; 
+
+        staticBackground.onload = function() {
+            var yoda = new Kinetic.Image({
+                x: 0,
+                y: 0,
+                image: staticBackground,
+                width: 1280,
+                height: 720
+            });
+
+		}
+        layer.add(staticBackground);
+        return [layer]; 
+
 	}
 	
 	function setStage(mainStage){
@@ -29,7 +44,7 @@ var background = (function(){
 	return{
 		drawBackground:drawBackground,
 		setStage:setStage,
-	}
+	};
 	
 	
 })();
