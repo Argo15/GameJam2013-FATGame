@@ -1,14 +1,17 @@
 var menustate = (function()
 {
 	var stage;
-	var backgroundLayer,
-		buttonLayer;
+	var skyLayer,
+		cloudLayer,
+		buttonLayer,
+		textLayer;
 	
 	function init()
 	{
 	    createStage();
 	    addBackground();
 	    addButtons();
+	    addText();
 	}
 	
 	function createStage(){
@@ -18,12 +21,15 @@ var menustate = (function()
 			height: 720,
 		});
 
-		backgroundLayer = new Kinetic.Layer();
+		cloudLayer = new Kinetic.Layer();
+		skyLayer = new Kinetic.Layer();
 		buttonLayer = new Kinetic.Layer();
+		textLayer = new Kinetic.Layer();
 	}
 	
 	function addBackground()
 	{
+/*
 	    var backgroundObject = new Kinetic.Rect({
 	      	x: 0,
 	        y: 0,
@@ -31,8 +37,30 @@ var menustate = (function()
 	        height: 720,
 	        fill: 'purple',
 	      })
-	      backgroundLayer.add(backgroundObject);
-	      stage.add(backgroundLayer);
+*/
+	      background.setStage(stage);
+		  var skyLayer = background.drawBackground()[0];
+	      stage.add(skyLayer);
+	}
+	
+	function addText() {
+	    var fatText = new Kinetic.Text({
+        	x: stage.getWidth() / 2,
+        	y: 15,
+        	text: 'F A T',
+        	fontSize: 300,
+        	fontFamily: 'Calibri',
+        	fill: 'pink',
+        	stroke: 'purple',
+        	strokeWidth: 10,
+      });
+      
+      fatText.setOffset({
+      		x: fatText.getWidth() / 2
+      });
+      
+      textLayer.add(fatText);
+      stage.add(textLayer);
 	}
 	
 	function addButtons()
