@@ -15,6 +15,22 @@ body{
 	display:block;
 }
 
+#startPrompt{
+	display:none;
+	/* -- transition is the magic sauce for animation -- */
+	-o-transition: all .4s ease-in-out;
+	-ms-transition: all .4s ease-in-out;
+	-moz-transition: all .4s ease-in-out;
+	-webkit-transition: all .4s ease-in-out;
+	position: absolute;
+	width: 400px;
+	height: 200px;
+	top: 200px;
+	left: 430px;
+	
+	background: url("../images/fstart.png");
+	background-size: 100% 100%;
+}
 
 #muteButton{
 	position:absolute;

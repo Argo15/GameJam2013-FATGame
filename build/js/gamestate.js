@@ -50,7 +50,7 @@ var gamestate = (function(){
 		mySnd = new buzz.sound("./sounds/runningsong", {
 			formats: [ "mp3"]
 		});
-		
+		gui.setCalories(0);
 		mySnd.play();
 		
 		
