@@ -288,9 +288,41 @@ var gamestate = (function(){
 			combo = 0;
 			
 			
+			addBurger();
 			
-			gameLayer
+			
 		}
+	}
+	
+	function addBurger(){
+		var burgerImg = new Image();
+		burgerImg.src = "./images/burgerbonus.png";
+		var burger = new Kinetic.Image({
+			x: player.getX() + 50,
+			y: -100,
+			image: burgerImg,
+			width: 182,
+			height: 154,
+			offset: {x:91, y:77},
+		});
+		
+		gameLayer.add(burger);
+		
+		burger.transitionTo({
+			y:player.getY(),
+			rotation: Math.PI * 2,
+			duration:1
+		});
+		
+		setTimeout(function(){
+			burger.setOpacity(0);
+			//gameLayer.remove(burger);
+		},1000);
+		
+		
+		
+		
+		
 	}
 
 	function updateVariables(){
@@ -341,13 +373,14 @@ var gamestate = (function(){
         }
         else
         {
-        	mySnd.stop();
+        	
             die();
         }
 	}
 	
 	
 	function die(){
+		 mySnd.stop();
 		 heartRate = 0;
 		 angleInc = 1;
 		 stage.remove();
