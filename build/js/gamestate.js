@@ -87,14 +87,17 @@ var gamestate = (function(){
 		
 		$(container).addClass("goodItem");
 		
-		gui.setCalories(50);
-		$(textContainer).append(container);
+		if(!deathCalled){
 		
-		
-		setTimeout(function(){
-			$(container).css("top", "0");
-			$(container).css("opacity", "0");
-		}, 200)
+			gui.setCalories(50);
+			$(textContainer).append(container);
+			
+			
+			setTimeout(function(){
+				$(container).css("top", "0");
+				$(container).css("opacity", "0");
+			}, 200)
+		}
 	}
 	
 	function createBonusText(){
@@ -119,12 +122,15 @@ var gamestate = (function(){
 		
 		$(container).addClass("badItem");
 		
-		gui.setCalories(-50);
-		$(textContainer).append(container);
-		setTimeout(function(){
-			$(container).css("top", "0");
-			$(container).css("opacity", "0");
-		}, 200)
+		if(!deathCalled){
+		
+			gui.setCalories(-50);
+			$(textContainer).append(container);
+			setTimeout(function(){
+				$(container).css("top", "0");
+				$(container).css("opacity", "0");
+			}, 200)
+		}
 	}
 
 	function createStage(){
@@ -452,6 +458,56 @@ var gamestate = (function(){
 		if(!deathCalled){
 			 speed = 0;
 			deathCalled = true;
+			player.setOpacity(0);
+			
+			
+			var anims = {
+				dead: [{
+					x:0,
+					y:0,
+					width:256,
+					height:256
+				},{
+					x:256,
+					y:0,
+					width:256,
+					height:256
+				},{
+					x:0,
+					y:256,
+					width:256,
+					height:256
+				},{
+					x:256,
+					y:265,
+					width:256,
+					height:256
+				}]
+			}
+			
+			var playerImage = new Image();
+			playerImage.src = "./images/poopedhimself.png";
+			    var playerDead = new Kinetic.Sprite({
+			        x: player.getX(),
+			        y: player.getY(),
+			        offset: {x:256, y:206},
+			        image: playerImage,
+			        animation:'dead',
+			        animations: anims,
+			        frameRate: 6
+			      });
+			     
+				
+				guiLayer.add(playerDead);
+				 playerDead.start();
+			      playerDead.setScale(-1, 1);
+			
+			stage.draw();
+			
+			setTimeout(function(){
+				playerDead.stop();
+			},500)
+			
 			 setTimeout(function(){
 			 	mySnd.stop();
 				 heartRate = 00;
@@ -461,6 +517,7 @@ var gamestate = (function(){
 		         currentstate = scorestate;
 		         currentstate.init(gui.getCalories());
 			 }, 2000)
+			 
 		 }
 		 
 	}

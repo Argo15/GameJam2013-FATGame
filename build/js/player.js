@@ -8,7 +8,6 @@ var playerClass = (function(){
 		
 		animations = {
 			walking: getAnimationArray(16, 0),
-			dying: getAnimationArray(4, 16),
 		}
 		
 		return animations;
