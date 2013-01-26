@@ -31,6 +31,14 @@ var gamestate = (function(){
 
 
 	function init(){
+		
+		var mySnd = new buzz.sound("./sounds/runningsong", {
+			formats: [ "mp3"]
+		});
+		
+		mySnd.play();
+		
+		
 		input.addKeyListeners();
 		createStage();
 		addBackground();
@@ -179,6 +187,7 @@ var gamestate = (function(){
         }
         else
         {
+        	mySnd.stop();
             stage.remove();
             currentstate.init();
         }
