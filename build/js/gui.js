@@ -88,7 +88,7 @@ var gui = (function(){
 	
     function getAnimationFrame(frame){
         var x = (512 * (frame % 2));
-        var y = (256 * Math.floor(frame / 4));
+        var y = (256 * Math.floor(frame / 2));
         return { 
             x : x,
             y : y,
