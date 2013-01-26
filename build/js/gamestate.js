@@ -34,11 +34,9 @@ var gamestate = (function(){
 		input.addKeyListeners();
 		createStage();
 		addBackground();
-		addGround();
 		addGui();
 		addGameElements();
-
-		startLoop();
+		addGround();
 	}
 
 	function addGui(){
@@ -117,7 +115,7 @@ var gamestate = (function(){
         	width: 74,
         	height: 130
         });
-        metronomeArrow.rotate(176 * (Math.PI/180));
+        metronomeArrow.setRotation(176 * (Math.PI/180));
 
 		guiLayer.add(metronomeBackground);
 		guiLayer.add(metronomeArrow);
@@ -145,7 +143,7 @@ var gamestate = (function(){
 
 		if(angleMode == "increase"){
 			angle += 1;
-			if(angle >= 300){
+			if(angle >= 241){
 				angleMode = "decrease";
 				metronomeDirection = -1;
 			}
@@ -153,7 +151,7 @@ var gamestate = (function(){
 
 		if(angleMode == "decrease"){
 			angle -= 1;
-			if(angle <= 176){
+			if(angle <= 175){
 				angleMode = "increase";
 				metronomeDirection = 1;
 			}
@@ -161,7 +159,7 @@ var gamestate = (function(){
 		//console.log(angle);
 
 		gui.setHeartRate(heartRate);
-		metronomeArrow.rotate(.5 * (Math.PI/180) * metronomeDirection);
+		metronomeArrow.setRotation(angle * (Math.PI/180));
 	}
 
 	function moveScreen(){

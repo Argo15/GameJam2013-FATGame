@@ -4,7 +4,6 @@ var ground = (function(){
 	var groundLayer = new Kinetic.Layer;
 	
 	function drawGround(startIndex, endIndex){
-		
 		this.groundLayer.destroy();
 		var width = 30000;
 		var segmentLength = width / Path.nNumSamples;
@@ -16,7 +15,7 @@ var ground = (function(){
 	        var pX2 = (i+1) * segmentLength;
 		    var groundTriangleOne = new Kinetic.Polygon({
 	            points : [ pX1, 400 - height1, pX1, 1000, pX2, 1000, pX2, 400 - height2],
-	            fill: 'green',
+	            fill: 'green'
 	          })
     	      
 	        this.groundLayer.add(groundTriangleOne);
