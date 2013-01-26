@@ -147,7 +147,7 @@ var main = (function(){
 			}
 		}
 		
-		//console.log(angle)
+		gui.setHeartRate(heartRate);
 	}
 	
 	function moveScreen(){
@@ -171,9 +171,11 @@ var main = (function(){
 			if(angle < threshold){
 				console.log("GOODHIT")
 				speed += 1;
+				heartRate += 10;
 			} else {
 				console.log("BAD");
 				speed -= 1;
+				heartRate -= 10;
 			}
 			
 		} else if(input == KEY.F){
@@ -182,9 +184,11 @@ var main = (function(){
 			if(angle > (90 - threshold)){
 				console.log("GOODHIT")
 				speed += 1;
+				heartRate += 10;
 			} else {
 				console.log("BAD");
 				speed -= 1;
+				heartRate -= 10;
 			}
 			
 		} else if(input == KEY.T){
