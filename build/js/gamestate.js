@@ -12,7 +12,7 @@ var gamestate = (function(){
 		groundObject;
 
 	var gravity = 10,
-		speed = 5;
+		speed = 50;
 
 	var metronomeDirection = 1;
 
@@ -257,9 +257,10 @@ var gamestate = (function(){
         }
         else
         {
-        	//mySnd.stop();
-            //stage.remove();
-            //currentstate.init();
+        	mySnd.stop();
+            stage.remove();
+            currentstate = scorestate;
+            currentstate.init(gui.getCalories());
         }
 	}
 

@@ -166,9 +166,14 @@ var gui = (function(){
 		heartText.setText((Math.ceil(amt)) + " BPM");
 	}
 	
+	function getCalories(){
+	    return calories;
+	}
+	
 	return{
 		drawGui:drawGui,
 		setHeartRate:setHeartRate,
+		getCalories:getCalories,
 	}
 	
 	
