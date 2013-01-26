@@ -28,11 +28,11 @@ var gamestate = (function(){
 		angle = 176,
 		angleMode = "increase";
 
-
+    var mySnd;
 
 	function init(){
 		
-		var mySnd = new buzz.sound("./sounds/runningsong", {
+		mySnd = new buzz.sound("./sounds/runningsong", {
 			formats: [ "mp3"]
 		});
 		
@@ -45,8 +45,6 @@ var gamestate = (function(){
 		addGround();
 		addGui();
 		addGameElements();
-
-		startLoop();
 	}
 
 	function addGui(){
