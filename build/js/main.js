@@ -218,6 +218,10 @@ var main = (function(){
 			}
 
 	}
+	
+	function getAngle(){
+		return angle;
+	}
 
 
 	return{
