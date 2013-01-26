@@ -163,7 +163,7 @@ var gui = (function(){
 		calories += amt/1000;
 		calsBurnedText.setText(Math.ceil(calories));
 		//heartBar.setWidth(amt*2);
-		heartText.setText((Math.ceil(amt*2)) + " BPM");
+		heartText.setText((Math.ceil(amt)) + " BPM");
 	}
 	
 	return{

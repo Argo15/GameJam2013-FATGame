@@ -175,7 +175,7 @@ var gamestate = (function(){
 			fKeyInit = true;
 			setTimeout(function(){
 				if(fKeyDown == false){
-					heartRate += 5;
+					heartRate += 10;
 				} else {
 					missed = false;
 				}
@@ -188,7 +188,7 @@ var gamestate = (function(){
 			aKeyInit = true;
 			setTimeout(function(){
 				if(aKeyDown == false){
-					heartRate += 5;
+					heartRate += 10;
 				} else {
 					missed = false;
 				}
@@ -201,7 +201,7 @@ var gamestate = (function(){
 			tKeyInit = true;
 			setTimeout(function(){
 				if(tKeyDown == false){
-					heartRate += 5;
+					heartRate += 10;
 				} else {
 					missed = false;
 				}
@@ -236,10 +236,10 @@ var gamestate = (function(){
 		metronomeArrow.setRotation(angle * (Math.PI/180));
 		
 		
-		if(heartRate*2 > maxBPM){
+		if(heartRate > maxBPM){
 			console.log("UR FUKIN DUN KID");
 		}
-		if(heartRate*2 < 100){
+		if(heartRate < 100){
 			heartRate = 100;
 		}
 	}
