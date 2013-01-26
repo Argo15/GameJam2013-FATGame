@@ -37,11 +37,8 @@ var main = (function(){
 	
 	function addBackground(){
 		
-		
-		if(background.drawBackground != null){
-			cloudLayer.add(background.drawBackground());
-		}
-		
+		background.setStage(stage);
+		background.drawBackground();
 		
 	}
 	
