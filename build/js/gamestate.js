@@ -201,8 +201,25 @@ var gamestate = (function(){
 
 		guiLayer.add(metronomeBackground);
 		guiLayer.add(metronomeArrow);
+		
+		var pHatObject = new Image();
+		pHatObject.src = hatPath;
+		var playerHat = new Kinetic.Image({
+			x: player.getX() + 270,
+			y: player.getY() - 300,
+			image: pHatObject,
+			width: 135,
+			height: 139,
+			offset: {x:100, y:100},
+		});
+		
+		console.log(playerHat);
+		
+		
+		
 
 	      gameLayer.add(player);
+	      gameLayer.add(playerHat);
 	      stage.add(background.drawBackground()[0]);
 	      stage.add(gameLayer);
 	      stage.add(ground.groundLayer);
@@ -352,7 +369,7 @@ var gamestate = (function(){
 		//heartRate -= .1;
 		if(fKeyPressedOnce)
 		{
-		    angleInc += .001;
+		    angleInc += .002;
 		}
 		if(fKeyPressedOnce && angleMode == "increase"){
 			angle += angleInc;
