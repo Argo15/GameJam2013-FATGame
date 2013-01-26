@@ -39,7 +39,7 @@ var main = (function(){
 	}
 	
 	function addGui(){
-		gui.drawGui();
+		guiLayer = gui.drawGui();
 	}
 
 	function createStage(){
