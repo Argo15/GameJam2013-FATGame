@@ -1,45 +1,67 @@
 var main = (function(){
-	
+
 	var stage;
 	var gameLayer,
 		groundLayer,
 		skyLayer,
-		cloudLayer;
-	
-	
+		cloudLayer,
+		guiLayer;
+
+
 	var player,
 		groundObject;
-	
+		
 	var gravity = 10,
 		speed = 5;
+		
+	var KEY = {
+		A:65,
+		F:70,
+		T:84,
+	};
 	
+	//Game Variables
+	var heartRate = 50,
+		threshold = 10,
+		angle = 45,
+		angleMode = "increase";
+	
+	
+
 	function init(){
 		input.addKeyListeners();
 		createStage();
 		addBackground();
 		addGround();
 		addGameElements();
+		addGui();
 		startLoop();
 	}
 	
+	function addGui(){
+		gui.drawGui();
+	}
+
 	function createStage(){
 		stage = new Kinetic.Stage({
 			container: 'container',
 			width: 1280,
 			height: 720,
 		});
-		
+
 		gameLayer = new Kinetic.Layer();
 		groundLayer = new Kinetic.Layer();
-		skyLayer = new Kinetic.Layer();
+		
 		cloudLayer = new Kinetic.Layer();
+		guiLayer = new Kinetic.Layer();
 
 	}
-	
+
 	function addBackground(){
 		
 		background.setStage(stage);
-		background.drawBackground();
+		skyLayer = background.drawBackground()[0];
+		console.log(skyLayer);
 		
 	}
 	
@@ -52,8 +74,8 @@ var main = (function(){
 	}
 	
 	function addGameElements(){
-		
-		
+
+
 		var playerImage = new Image();
 		playerImage.src = "./images/bill.png";
 	    player = new Kinetic.Sprite({
@@ -66,12 +88,11 @@ var main = (function(){
 	        frameRate: 5
 	      });
 	      player.setScale(-1, 1);
-	      
+
 	      //Start Player Animation
 	      playerImage.onload= function(){
 	      	player.start();
 	      }
-	      
 	      
 	      groundObject = new Kinetic.Rect({
 	      	x: 0,
@@ -80,56 +101,119 @@ var main = (function(){
 	        height: 100,
 	        fill: 'green',
 	      })
-	      
-	      
+
+
 	      player.onGround = false;
-	      
+
 	      gameLayer.add(player);
 	      groundLayer.add(groundObject);
+	      stage.add(background.drawBackground()[0]);
 	      stage.add(gameLayer);
 	      stage.add(groundLayer);
+	      stage.add(guiLayer);
 	}
-	
+
 	function startLoop(){
 		 setInterval(function(){
 	      	update();
 	      },1000/60);
 	}
-	
-	
+
+
 	function update(){
 		if(collides(player, groundObject)){
 			player.onGround = true;
 		} else {
 			player.onGround = false;
 		}
-		
-		
+
+
 		if(!player.onGround){
 			dropPlayer();
 		}
-		
+
 		moveScreen();
+
+		updateVariables();
 		
-		
-		
-		
-		
+
+
 		stage.draw();
 	}
+	
+	function updateVariables(){
+		heartRate -= .1;
+		
+		if(angleMode == "increase"){
+			angle += .5;
+			if(angle >= 90){
+				angleMode = "decrease";
+			}
+		}
+		
+		if(angleMode == "decrease"){
+			angle -= .5;
+			if(angle <= 0){
+				angleMode = "increase";
+			}
+		}
+		
+		//console.log(angle)
+	}
+	
 	function moveScreen(){
 		groundLayer.setX(groundLayer.getX() - speed);
 		//console.log("GROUND LAYER POSITION: " + groundLayer.getX());
 	}
-	
+
 	function dropPlayer(){
 		player.setY(player.getY() + gravity);
 	}
 	
+	
+	function setInput(input){
+		if(input == KEY.A){
+			//Left Foot
+			playerClass.operateMovement("left");
+			if(angle < threshold){
+				console.log("GOODHIT")
+				speed += 1;
+			} else {
+				console.log("BAD");
+				speed -= 1;
+			}
+			
+		} else if(input == KEY.F){
+			//Right Foot
+			playerClass.operateMovement("right");
+			if(angle > (90 - threshold)){
+				console.log("GOODHIT")
+				speed += 1;
+			} else {
+				console.log("BAD");
+				speed -= 1;
+			}
+			
+		} else if(input == KEY.T){
+			//Breath
+			playerClass.operateBreathing();
+			
+		}
+		
+		if(speed < 1){
+			speed = 1;
+		}
+	}
+	
+	
+	
+	
+	
+
 	function getStage(){
 		return stage;
 	}
-	
+
 	function collides(a, b){
 		if (a!= undefined && b!= undefined){
 			x1 = parseFloat(a.getX());
@@ -140,9 +224,9 @@ var main = (function(){
 			w2 = parseFloat(b.getWidth());
 			h1 = parseFloat(a.getHeight());
 			h2 = parseFloat(b.getHeight());
-			
+
 			//console.log(x1 + " " + x2);
-			
+
 			return x1 < x2 + w2 &&
 					x1 + w1 > x2 &&
 					y1 < y2 + h2 &&
@@ -153,12 +237,18 @@ var main = (function(){
 
 	}
 	
-	
+	function getAngle(){
+		return angle;
+	}
+
+
 	return{
 		init:init,
+		setInput:setInput,
 		getStage:getStage,
+		getAngle:getAngle,
 	}
-	
-		
-	
+
+
+
 })();
