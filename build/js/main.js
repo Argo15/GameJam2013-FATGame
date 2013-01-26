@@ -4,7 +4,8 @@ var main = (function(){
 	var gameLayer,
 		groundLayer,
 		skyLayer,
-		cloudLayer;
+		cloudLayer,
+		guiLayer;
 
 
 	var player,
@@ -12,6 +13,20 @@ var main = (function(){
 		
 	var gravity = 10,
 		speed = 5;
+		
+	var KEY = {
+		A:65,
+		F:70,
+		T:84,
+	};
+	
+	//Game Variables
+	var heartRate = 50,
+		threshold = 10,
+		angle = 45,
+		angleMode = "increase";
+	
+	
 
 	function init(){
 		input.addKeyListeners();
@@ -19,7 +34,12 @@ var main = (function(){
 		addBackground();
 		addGround();
 		addGameElements();
+		addGui();
 		startLoop();
+	}
+	
+	function addGui(){
+		gui.drawGui();
 	}
 
 	function createStage(){
@@ -31,15 +51,17 @@ var main = (function(){
 
 		gameLayer = new Kinetic.Layer();
 		groundLayer = new Kinetic.Layer();
-		skyLayer = new Kinetic.Layer();
+		
 		cloudLayer = new Kinetic.Layer();
+		guiLayer = new Kinetic.Layer();
 
 	}
 
 	function addBackground(){
 		
 		background.setStage(stage);
-		background.drawBackground();
+		skyLayer = background.drawBackground()[0];
+		console.log(skyLayer);
 		
 	}
 	
@@ -86,8 +108,10 @@ var main = (function(){
 
 	      gameLayer.add(player);
 	      groundLayer.add(groundObject);
+	      stage.add(background.drawBackground()[0]);
 	      stage.add(gameLayer);
 	      stage.add(groundLayer);
+	      stage.add(guiLayer);
 	}
 
 	function startLoop(){
@@ -101,7 +125,29 @@ var main = (function(){
 		movePlayer();
 		moveScreen();
 
+		updateVariables();
+		
 		stage.draw();
+	}
+	
+	function updateVariables(){
+		heartRate -= .1;
+		
+		if(angleMode == "increase"){
+			angle += .5;
+			if(angle >= 90){
+				angleMode = "decrease";
+			}
+		}
+		
+		if(angleMode == "decrease"){
+			angle -= .5;
+			if(angle <= 0){
+				angleMode = "increase";
+			}
+		}
+		
+		//console.log(angle)
 	}
 	
 	function moveScreen(){
@@ -116,6 +162,46 @@ var main = (function(){
             player.setY(400 - Path.getHeight(Math.floor(index)));
         }
 	}
+	
+	
+	function setInput(input){
+		if(input == KEY.A){
+			//Left Foot
+			playerClass.operateMovement("left");
+			if(angle < threshold){
+				console.log("GOODHIT")
+				speed += 1;
+			} else {
+				console.log("BAD");
+				speed -= 1;
+			}
+			
+		} else if(input == KEY.F){
+			//Right Foot
+			playerClass.operateMovement("right");
+			if(angle > (90 - threshold)){
+				console.log("GOODHIT")
+				speed += 1;
+			} else {
+				console.log("BAD");
+				speed -= 1;
+			}
+			
+		} else if(input == KEY.T){
+			//Breath
+			playerClass.operateBreathing();
+			
+		}
+		
+		if(speed < 1){
+			speed = 1;
+		}
+	}
+	
+	
+	
+	
+	
 
 	function getStage(){
 		return stage;
@@ -143,11 +229,17 @@ var main = (function(){
 			}
 
 	}
+	
+	function getAngle(){
+		return angle;
+	}
 
 
 	return{
 		init:init,
+		setInput:setInput,
 		getStage:getStage,
+		getAngle:getAngle,
 	}
 
 
