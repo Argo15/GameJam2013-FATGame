@@ -7,7 +7,8 @@ var heartMonitorClass = (function(){
 		
 		
 		animations = {
-			walking: getAnimationArray(8)
+			walking: getAnimationArray(8),
+			//danger: getAnimationArray(8),
 		}
 		
 		return animations;

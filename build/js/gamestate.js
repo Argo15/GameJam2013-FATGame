@@ -12,7 +12,7 @@ var gamestate = (function(){
 		groundObject;
 
 	var gravity = 10,
-		speed = 50;
+		speed = 5;
 
 	var metronomeDirection = 1;
 
@@ -37,6 +37,7 @@ var gamestate = (function(){
 		angleMode = "increase";
 	
 	var maxBPM = 250;
+	var angleInc = 1;
 
     var mySnd;
     
@@ -250,9 +251,10 @@ var gamestate = (function(){
 
 	function updateVariables(){
 		//heartRate -= .1;
-
+		
+		angleInc += .0005;
 		if(angleMode == "increase"){
-			angle += 1;
+			angle += angleInc;
 			if(angle >= 241){
 				angleMode = "decrease";
 				metronomeDirection = -1;
@@ -260,7 +262,7 @@ var gamestate = (function(){
 		}
 
 		if(angleMode == "decrease"){
-			angle -= 1;
+			angle -= angleInc;
 			if(angle <= 175){
 				angleMode = "increase";
 				metronomeDirection = 1;
@@ -273,7 +275,7 @@ var gamestate = (function(){
 		
 		
 		if(heartRate > maxBPM){
-			heartRate = maxBPM;
+			die();
 		}
 		if(heartRate < 100){
 			heartRate = 100;
@@ -294,12 +296,18 @@ var gamestate = (function(){
         else
         {
         	mySnd.stop();
-            stage.remove();
-            currentstate = scorestate;
-            currentstate.init(gui.getCalories());
+            die();
         }
 	}
-
+	
+	
+	function die(){
+		 heartRate = 0;
+		 angleInc = 1;
+		 stage.remove();
+         currentstate = scorestate;
+         currentstate.init(gui.getCalories());
+	}
 
 	// trigger F when angle is between 175 - 180
 	// Trigger A when angle is between 205 - 210
