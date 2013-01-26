@@ -131,8 +131,7 @@ body{
 	width: 400px;
 	height: 200px;
 	top: 200px;
-	left: 50%;
-	margin-left: -250px;
+	left: 430px;
 	background: url("../images/sandwich_win.png");
 	background-size: 100% 100%;
 	
@@ -148,8 +147,8 @@ body{
 	width: 400px;
 	height: 200px;
 	top: 200px;
-	left: 50%;
-	margin-left: -250px;
+	left: 430px;
+	
 	background: url("../images/pillslose.png");
 	background-size: 100% 100%;
 	
@@ -165,8 +164,7 @@ body{
 	width: 400px;
 	height: 200px;
 	top: 200px;
-	left: 50%;
-	margin-left: -250px;
+	left: 430px;
 	background: url("../images/bonusbag.png");
 	background-size: 100% 100%;
 	
