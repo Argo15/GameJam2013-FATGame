@@ -222,8 +222,8 @@ var gamestate = (function(){
 					x: player.getX() + 0,
 					y: player.getY() - 0,
 					image: pHatObject,
-					width: 135,
-					height: 139,
+					width: 198,
+					height: 181,
 					
 				});
 				 gameLayer.add(playerHat);
@@ -244,8 +244,8 @@ var gamestate = (function(){
 		ground.drawGround(index-6, index+13);
 		movePlayer();
 		if(playerHat){
-			playerHat.setX(player.getX() + 58);
-			playerHat.setY(player.getY() - 320);
+			playerHat.setX(player.getX() + 13);
+			playerHat.setY(player.getY() - 363);
 		}
 		
 		if (fKeyPressedOnce)
