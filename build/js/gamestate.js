@@ -5,7 +5,7 @@ var gamestate = (function(){
 		skyLayer,
 		cloudLayer,
 		guiLayer;
-
+	var playerHat;
 
 	var player,
 		metronomeArrow,
@@ -102,7 +102,7 @@ var gamestate = (function(){
 		$(container).addClass("bonusItem");
 		
 		gui.setCalories(50);
-		$(textContainer).append(container);
+		//$(textContainer).append(container);
 		
 		
 		setTimeout(function(){
@@ -203,16 +203,8 @@ var gamestate = (function(){
 		guiLayer.add(metronomeBackground);
 		guiLayer.add(metronomeArrow);
 		
-		var pHatObject = new Image();
-		pHatObject.src = hatPath;
-		var playerHat = new Kinetic.Image({
-			x: player.getX() + 270,
-			y: player.getY() - 300,
-			image: pHatObject,
-			width: 135,
-			height: 139,
-			offset: {x:100, y:100},
-		});
+		
+		
 		
 		console.log(playerHat);
 		
@@ -220,7 +212,23 @@ var gamestate = (function(){
 		
 
 	      gameLayer.add(player);
-	      gameLayer.add(playerHat);
+	      
+	      if(hatPath){
+				var pHatObject = new Image();
+				pHatObject.src = hatPath;
+				playerHat = new Kinetic.Image({
+					x: player.getX() + 0,
+					y: player.getY() - 0,
+					image: pHatObject,
+					width: 135,
+					height: 139,
+					
+				});
+				 gameLayer.add(playerHat);
+			}
+	      
+	      
+	     
 	      stage.add(background.drawBackground()[0]);
 	      stage.add(gameLayer);
 	      stage.add(ground.groundLayer);
@@ -233,6 +241,11 @@ var gamestate = (function(){
 	    var index = Math.floor(Path.nNumSamples * -((ground.groundLayer.getX()-400) / 30000));
 		ground.drawGround(index-6, index+13);
 		movePlayer();
+		if(playerHat){
+			playerHat.setX(player.getX() + 58);
+			playerHat.setY(player.getY() - 320);
+		}
+		
 		if (fKeyPressedOnce)
 	    {
 	    	
@@ -428,6 +441,8 @@ var gamestate = (function(){
         	
             die();
         }
+        
+        
 	}
 	
 	
@@ -461,30 +476,26 @@ var gamestate = (function(){
 			//Left Foot
 			playerClass.operateMovement("left");
 			if((angle >= 203) && (angle <= 216) && !aKeyDown){
-				console.log("GOODHIT")
 				aKeyDown = true;
-
 			} 
 
 		} else if(input == KEY.T){
 			//Breath
 			playerClass.operateBreathing();
 			if(angle >= 232 && !tKeyDown){
-				console.log("GOODHIT")
 				tKeyDown = true;
-
 			}
 		}
 		
 		if (input == KEY.F || input == KEY.A || input == KEY.T)
 		{
-		    if (!badKeyDown && ((angle > 187 && angle < 203) || (angle > 216 && angle < 232))) {
+		    if (!badKeyDown && ((angle > 190 && angle < 200) || (angle > 218 && angle < 228))) {
 		        heartRate += 5;
 			    console.log("BAD");
                 badKeyDown = true;
                 setTimeout(function(){
                     badKeyDown = false;
-			    }, 100);
+			    }, 200);
                 combo = 0;
 	        }
 	    }

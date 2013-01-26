@@ -66,26 +66,21 @@ var scorestate = (function()
 	
 	function addButtons()
 	{
-	    var startButton = new Kinetic.Text({
-	      	x: 575,
-	        y: 530,
-	        width: 200,
-	        height: 100,
-			text: "Again",
-			fontSize: 60,
-			fontFamily: 'Calibri',
-       		fill: 'black',
-	      });
-	    var startButtonBackground = new Kinetic.Rect({
-	      	x: 540,
-	        y: 510,
-	        width: 200,
-	        height: 100,
-       		fill: 'Yellow'
-	      });
+	   var againImg = new Image();
+	   againImg.src = "./images/againbutton.png";
+	   var againButton = new Kinetic.Image({
+			x: stage.getWidth()/2,
+			y: 375,
+			image: againImg,
+			width: 500,
+			height: 250,
+		});
+		
+		againButton.setOffset({
+      		x: againButton.getWidth() / 2
+      	});
 	      
-	    buttonLayer.add(startButtonBackground);
-	    buttonLayer.add(startButton);
+	    buttonLayer.add(againButton);
 	    buttonLayer.on('click', function() {
             stage.remove();
             currentstate = gamestate;
