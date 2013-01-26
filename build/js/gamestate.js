@@ -22,7 +22,8 @@ var gamestate = (function(){
 		T:84,
 	};
 	
-	var changedAnim = true;
+	var changedAnim = false;
+	var currentAnim = "good";
 	
 	var fKeyDown = false;
 	var aKeyDown = false;
@@ -399,12 +400,14 @@ var gamestate = (function(){
 			heartRate = 100;
 		}
 		
-		if(heartRate < 200 && !changedAnim){
+		if(heartRate < 200 && !changedAnim && currentAnim != "good"){
 			gui.setAnim("good");
+			currentAnim = "good";
 		} 
 		
-		if(heartRate > 200 && !changedAnim){
-			gui.setAnim("bad")
+		if(heartRate > 200 && !changedAnim && currentAnim != "bad"){
+			gui.setAnim("bad");
+			currentAnim = "bad";
 		}
 		
 	}
