@@ -35,8 +35,12 @@ var gamestate = (function(){
 		threshold = 15,
 		angle = 176,
 		angleMode = "increase";
+	
+	var maxBPM = 250;
 
     var mySnd;
+    
+    var missed = true;
 
 	function init(){
 		
@@ -55,7 +59,9 @@ var gamestate = (function(){
 		addGameElements();
 		
 		setInterval(function(){
-			heartRate -= 1;
+			if(!missed){
+				heartRate -= 1;
+			}
 		},1000)
 	}
 
@@ -171,6 +177,7 @@ var gamestate = (function(){
 				if(fKeyDown == false){
 					heartRate += 5;
 				} else {
+					missed = false;
 				}
 				fKeyInit = false;
 				fKeyDown = false;
@@ -183,6 +190,7 @@ var gamestate = (function(){
 				if(aKeyDown == false){
 					heartRate += 5;
 				} else {
+					missed = false;
 				}
 				aKeyInit = false;
 				aKeyDown = false;
@@ -195,7 +203,7 @@ var gamestate = (function(){
 				if(tKeyDown == false){
 					heartRate += 5;
 				} else {
-					
+					missed = false;
 				}
 				console.log("GG UNINSTALL");
 				tKeyInit = false;
@@ -226,6 +234,14 @@ var gamestate = (function(){
 
 		gui.setHeartRate(heartRate);
 		metronomeArrow.setRotation(angle * (Math.PI/180));
+		
+		
+		if(heartRate*2 > maxBPM){
+			console.log("UR FUKIN DUN KID");
+		}
+		if(heartRate*2 < 100){
+			heartRate = 100;
+		}
 	}
 
 	function moveScreen(){
