@@ -29,6 +29,8 @@ var gamestate = (function(){
 	var fKeyInit = false;
 	var aKeyInit = false;
 	var tKeyInit = false;
+	
+	var fKeyPressedOnce = false;
 
 	//Game Variables
 	var heartRate = 50,
@@ -64,6 +66,8 @@ var gamestate = (function(){
 				heartRate -= 1;
 			}
 		},1000)
+		
+		fKeyPressedOnce = false;
 	}
 
 	function addGui(){
@@ -147,7 +151,7 @@ var gamestate = (function(){
 
 	      //Start Player Animation
 	      playerImage.onload= function(){
-	      	player.start();
+	      	player.setIndex(10);
 	      }
 
 	      player.onGround = false;
@@ -172,7 +176,8 @@ var gamestate = (function(){
         	width: 74,
         	height: 130
         });
-        metronomeArrow.setRotation(176 * (Math.PI/180));
+        angle = 176;
+        metronomeArrow.setRotation(angle * (Math.PI/180));
 
 		guiLayer.add(metronomeBackground);
 		guiLayer.add(metronomeArrow);
@@ -190,10 +195,13 @@ var gamestate = (function(){
 	    var index = Math.floor(Path.nNumSamples * -((ground.groundLayer.getX()-400) / 30000));
 		ground.drawGround(index-6, index+13);
 		movePlayer();
-		moveScreen();
-		checkCurrentRequirement();
+		if (fKeyPressedOnce)
+	    {
+		    moveScreen();
+		    checkCurrentRequirement();
 
-		updateVariables();
+		    updateVariables();
+		}
 
 		stage.draw();
 	}
@@ -205,12 +213,15 @@ var gamestate = (function(){
 		if (angle <= 184 && !fKeyInit){
 			fKeyInit = true;
 			setTimeout(function(){
-				if(fKeyDown == false){
-					heartRate += 10;
-					createBadText()
-				} else {
-					missed = false;
-					createGoodText();
+			    if (fKeyPressedOnce)
+			    {
+				    if(fKeyDown == false){
+					    heartRate += 10;
+					    createBadText()
+				    } else {
+					    missed = false;
+					    createGoodText();
+				    }
 				}
 				fKeyInit = false;
 				fKeyDown = false;
@@ -251,9 +262,11 @@ var gamestate = (function(){
 
 	function updateVariables(){
 		//heartRate -= .1;
-		
-		angleInc += .0005;
-		if(angleMode == "increase"){
+		if(fKeyPressedOnce)
+		{
+		    angleInc += .0005;
+		}
+		if(fKeyPressedOnce && angleMode == "increase"){
 			angle += angleInc;
 			if(angle >= 241){
 				angleMode = "decrease";
@@ -261,7 +274,7 @@ var gamestate = (function(){
 			}
 		}
 
-		if(angleMode == "decrease"){
+		if(fKeyPressedOnce && angleMode == "decrease"){
 			angle -= angleInc;
 			if(angle <= 175){
 				angleMode = "increase";
@@ -314,9 +327,15 @@ var gamestate = (function(){
 	// trigger T when angle i between 236 - 241
 	function setInput(input){
 		if(input == KEY.F){
+		    if (!fKeyPressedOnce)
+		    {
+		        player.start();
+		    }
+		    fKeyPressedOnce = true;
+		    
 			//Right Foot
 			playerClass.operateMovement("right");
-			if (angle <= 184 && !fKeyDown){
+			if (angle <= 187 && !fKeyDown){
 				fKeyDown = true;
 			} else {
 				console.log("BAD");
@@ -327,7 +346,7 @@ var gamestate = (function(){
 		} else if(input == KEY.A){
 			//Left Foot
 			playerClass.operateMovement("left");
-			if((angle >= 205) && (angle <= 214) && !aKeyDown){
+			if((angle >= 203) && (angle <= 216) && !aKeyDown){
 				console.log("GOODHIT")
 				aKeyDown = true;
 
@@ -339,7 +358,7 @@ var gamestate = (function(){
 		} else if(input == KEY.T){
 			//Breath
 			playerClass.operateBreathing();
-			if(angle >= 234 && !tKeyDown){
+			if(angle >= 232 && !tKeyDown){
 				console.log("GOODHIT")
 				tKeyDown = true;
 
