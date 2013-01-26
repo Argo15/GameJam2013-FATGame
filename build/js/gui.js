@@ -6,13 +6,25 @@ var gui = (function(){
 		
 	var monitor;
 	
-	var calsBurned,
-		calsBurnedTitle;
+	var calsBurnedText,
+		calsBurnedTitle,
+		calsBurnedBackground;
+		
+	var calories = 0;
+	
+	var mutebtn,
+		helpbtn;
+	
+	var soundoffsrc;
+	var soundonsrc;
+	
 	
 	var heartRateX = 1000;
 	
-	function drawGui(){
-		console.log("DRAWING GUI");
+	function drawGui(){		
+		
+		$('#overlayUI').addClass("active");
+		
 		
 		guiLayer = new Kinetic.Layer();
 		
@@ -22,25 +34,41 @@ var gui = (function(){
 			text: "100 BPM",
 			fontSize: 30,
 			fontFamily: 'Calibri',
-       		fill: 'black'
+       		fill: 'black',
+            zindex: 1
 		});
 		
-		calsBurnedTitle = new Kinetic.Text({
-			x:910,
+		var calsBgImage = new Image();
+		calsBgImage.src = "./images/calBG.png";
+		calsBurnedBackground = new Kinetic.Image({
+			x:860,
 			y:190,
+			image: calsBgImage,
+			width: 507,
+			height: 111,
+            zindex: 1
+		});
+		
+		calsBurnedBackground.setScale(.8, .8);
+		
+		
+		calsBurnedTitle = new Kinetic.Text({
+			x:900,
+			y:210,
 			text: "Calories Burned:",
 			  fontSize: 30,
 			fontFamily: 'Calibri',
-       		fill: 'black'
+       		fill: 'white'
 		})
 		
-		calsBurned = new Kinetic.Text({
-			x:1130,
-			y:190,
-			text: "200",
-			  fontSize: 40,
+		calsBurnedText = new Kinetic.Text({
+			x:1110,
+			y:205,
+			text: calories,
+			align:'left',
+			fontSize: 40,
 			fontFamily: 'Calibri',
-       		fill: 'black'
+       		fill: 'white'
 		})
 		
 		
@@ -63,13 +91,26 @@ var gui = (function(){
 			monitor.start();
 		}
 		
+		$("#muteButton").bind('click', function(){
+			if(muted){
+				muted = false;
+				$("#muteButton").removeClass("soundoff")
+			} else if(!muted){
+				muted = true;
+				$("#muteButton").addClass("soundoff")
+				
+			}
+			console.log(muted);
+			
+		});
 		
 		
-		
-		guiLayer.add(calsBurned);
+		guiLayer.add(calsBurnedBackground);
+		guiLayer.add(calsBurnedText);
 		guiLayer.add(calsBurnedTitle);
+		
 		guiLayer.add(heartText);
-		console.log(guiLayer);
+		
 		return guiLayer;
 	}
 	
@@ -107,7 +148,8 @@ var gui = (function(){
 			amt = 1;
 			//console.log("GAME IS OVER");
 		}
-		
+		calories += amt/1000;
+		calsBurnedText.setText(Math.ceil(calories));
 		//heartBar.setWidth(amt*2);
 		heartText.setText((Math.ceil(amt*2)) + " BPM");
 	}
