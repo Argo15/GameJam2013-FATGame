@@ -7,11 +7,15 @@ var main = (function(){
 	var player,
 		ground;
 	
-	var gravity = 10;
+	var gravity = 10,
+		speed = 5;
 	
 	function init(){
 		
+		
+		input.addKeyListeners();
 		createStage();
+		
 		
 	}
 	
@@ -23,11 +27,11 @@ var main = (function(){
 		});
 		
 		gameLayer = new Kinetic.Layer();
-		
+		groundLayer = new Kinetic.Layer();
 		
 	    player = new Kinetic.Rect({
 	        x: 239,
-	        y: 75,
+	        y: 175,
 	        width: 60,
 	        height: 100,
 	        fill: 'pink',
@@ -46,8 +50,9 @@ var main = (function(){
 	      console.log(player.onGround);
 	      
 	      gameLayer.add(player);
-	       gameLayer.add(ground);
+	       groundLayer.add(ground);
 	      stage.add(gameLayer);
+	      stage.add(groundLayer);
 	      
 	      
 	      setInterval(function(){
@@ -69,12 +74,18 @@ var main = (function(){
 			dropPlayer();
 		}
 		
+		moveScreen();
+		
+		
 		
 		
 		
 		stage.draw();
 	}
-	
+	function moveScreen(){
+		groundLayer.setX(groundLayer.getX() - speed);
+		console.log("GROUND LAYER POSITION: " + groundLayer.getX());
+	}
 	
 	function dropPlayer(){
 		player.setY(player.getY() + gravity);
