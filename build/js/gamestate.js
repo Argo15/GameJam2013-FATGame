@@ -38,7 +38,7 @@ var gamestate = (function(){
 	
 	var maxBPM = 250;
 	var angleInc = 1;
-
+	var combo = 0;
     var mySnd;
     
     var missed = true;
@@ -75,6 +75,22 @@ var gamestate = (function(){
 		var textContainer = $("#textContainer");
 		
 		$(container).addClass("goodItem");
+		
+		gui.setCalories(50);
+		$(textContainer).append(container);
+		
+		
+		setTimeout(function(){
+			$(container).css("top", "0");
+			$(container).css("opacity", "0");
+		}, 200)
+	}
+	
+	function createBonusText(){
+		var container = $("<div>");
+		var textContainer = $("#textContainer");
+		
+		$(container).addClass("bonusItem");
 		
 		gui.setCalories(50);
 		$(textContainer).append(container);
@@ -207,9 +223,11 @@ var gamestate = (function(){
 			setTimeout(function(){
 				if(fKeyDown == false){
 					heartRate += 10;
+					combo = 0;
 					createBadText()
 				} else {
 					missed = false;
+					combo++;
 					createGoodText();
 				}
 				fKeyInit = false;
@@ -222,9 +240,11 @@ var gamestate = (function(){
 			setTimeout(function(){
 				if(aKeyDown == false){
 					heartRate += 10;
+					combo = 0;
 					createBadText()
 				} else {
 					missed = false;
+					combo++;
 					createGoodText();
 				}
 				aKeyInit = false;
@@ -237,15 +257,27 @@ var gamestate = (function(){
 			setTimeout(function(){
 				if(tKeyDown == false){
 					heartRate += 10;
+					combo = 0;
 					createBadText()
 				} else {
 					missed = false;
+					combo++;
 					createGoodText();
 				}
 				console.log("GG UNINSTALL");
 				tKeyInit = false;
 				tKeyDown = false;
 			}, 400);
+		}
+		
+		console.log(combo);
+		if(combo > 5){
+			createBonusText();
+			combo = 0;
+			
+			
+			
+			gameLayer
 		}
 	}
 
