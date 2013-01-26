@@ -237,13 +237,13 @@ var gamestate = (function(){
 		if (ground.groundLayer.getX() > -29500)
 		{
 		    var index = Path.nNumSamples * -((ground.groundLayer.getX()-400) / 30000);
-            player.setY(400 - Path.getHeight(Math.floor(index)));
+            player.setY(410 - Path.getHeight(Math.floor(index)));
         }
         else
         {
-        	mySnd.stop();
+        	//mySnd.stop();
             stage.remove();
-            currentstate.init();
+            //currentstate.init();
         }
 	}
 
