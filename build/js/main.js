@@ -4,6 +4,19 @@ var main = (function(){
 	    currentstate = menustate;
 		currentstate.init();
 		startLoop();
+		
+		
+		$("#howToPlayButton").bind("click", function(){
+			console.log("FUCK")
+			$("#howToPlayScreen").css("display", "block")
+			$("#shadowBox").css("display", "block");
+		});
+		
+		$("#shadowBox").bind("click", function(){
+			$("#howToPlayScreen").css("display", "none")
+			$("#shadowBox").css("display", "none");
+		
+		});
 	}
 	
 	function startLoop(){

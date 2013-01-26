@@ -237,7 +237,7 @@ var gamestate = (function(){
 		
 		
 		if(heartRate > maxBPM){
-			console.log("UR FUKIN DUN KID");
+			heartRate = maxBPM;
 		}
 		if(heartRate < 100){
 			heartRate = 100;
@@ -258,7 +258,7 @@ var gamestate = (function(){
         else
         {
         	//mySnd.stop();
-            //stage.remove();
+            stage.remove();
             //currentstate.init();
         }
 	}
