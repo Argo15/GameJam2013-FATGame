@@ -6,6 +6,7 @@ var gamestate = (function(){
 		cloudLayer,
 		guiLayer;
 	var playerHat;
+	var deathCalled = false;
 
 	var player,
 		metronomeArrow,
@@ -51,6 +52,7 @@ var gamestate = (function(){
     var missed = true;
 
 	function init(){
+		deathCalled = false;
 		$("#howToPlayButton").css("display", "none");
 		mySnd = new buzz.sound("./sounds/runningsong", {
 			formats: [ "mp3"]
@@ -447,12 +449,20 @@ var gamestate = (function(){
 	
 	
 	function die(){
-		 mySnd.stop();
-		 heartRate = 0;
-		 angleInc = 1;
-		 stage.remove();
-         currentstate = scorestate;
-         currentstate.init(gui.getCalories());
+		if(!deathCalled){
+			 speed = 0;
+			deathCalled = true;
+			 setTimeout(function(){
+			 	mySnd.stop();
+				 heartRate = 00;
+				 angleInc = 1;
+				 speed = 0;
+			 	 stage.remove();
+		         currentstate = scorestate;
+		         currentstate.init(gui.getCalories());
+			 }, 2000)
+		 }
+		 
 	}
 
 	// trigger F when angle is between 175 - 180
