@@ -117,7 +117,7 @@ var gamestate = (function(){
         	width: 74,
         	height: 130
         });
-        metronomeArrow.rotate(176 * (Math.PI/180));
+        metronomeArrow.setRotation(176 * (Math.PI/180));
 
 		guiLayer.add(metronomeBackground);
 		guiLayer.add(metronomeArrow);
@@ -147,7 +147,7 @@ var gamestate = (function(){
 
 		if(angleMode == "increase"){
 			angle += 1;
-			if(angle >= 300){
+			if(angle >= 241){
 				angleMode = "decrease";
 				metronomeDirection = -1;
 			}
@@ -155,7 +155,7 @@ var gamestate = (function(){
 
 		if(angleMode == "decrease"){
 			angle -= 1;
-			if(angle <= 176){
+			if(angle <= 175){
 				angleMode = "increase";
 				metronomeDirection = 1;
 			}
@@ -163,7 +163,7 @@ var gamestate = (function(){
 		//console.log(angle);
 
 		gui.setHeartRate(heartRate);
-		metronomeArrow.rotate(.5 * (Math.PI/180) * metronomeDirection);
+		metronomeArrow.setRotation(angle * (Math.PI/180));
 	}
 
 	function moveScreen(){
@@ -185,14 +185,14 @@ var gamestate = (function(){
 	}
 
 
-	// trigger F when angle is between 0 - 5
-	// Trigger A when angle is between 59 - 64
-	// trigger T when angle i between 119 - 124
+	// trigger F when angle is between 175 - 180
+	// Trigger A when angle is between 205 - 210
+	// trigger T when angle i between 236 - 241
 	function setInput(input){
 		if(input == KEY.F){
 			//Right Foot
 			playerClass.operateMovement("right");
-			if((angle - 176) < threshold){
+			if (angle <= 184){
 				console.log("GOODHIT")
 				speed += 1;
 				heartRate += 10;
@@ -205,7 +205,7 @@ var gamestate = (function(){
 		} else if(input == KEY.A){
 			//Left Foot
 			playerClass.operateMovement("left");
-			if(((62 - threshold/2) < (angle - 176)) && ((angle - 176) < (62 + threshold/2))){
+			if((angle >= 205) && (angle <= 214)){
 				console.log("GOODHIT")
 				speed += 1;
 				heartRate += 10;
@@ -218,7 +218,7 @@ var gamestate = (function(){
 		} else if(input == KEY.T){
 			//Breath
 			playerClass.operateBreathing();
-			if((angle -  176) > (124 - threshold)){
+			if(angle >= 234){
 				console.log("GOODHIT")
 				speed += 1;
 				heartRate += 10;
