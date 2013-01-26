@@ -1,7 +1,9 @@
 var main = (function(){
 	
 	var stage;
-	var gameLayer;
+	var gameLayer,
+		groundLayer,
+		skyLayer;
 	
 	
 	var player,
@@ -15,6 +17,9 @@ var main = (function(){
 		
 		input.addKeyListeners();
 		createStage();
+		addBackground();
+		addGameElements();
+		startLoop();
 		
 		
 	}
@@ -28,6 +33,15 @@ var main = (function(){
 		
 		gameLayer = new Kinetic.Layer();
 		groundLayer = new Kinetic.Layer();
+
+	}
+	
+	function addBackground(){
+		
+	}
+	
+	function addGameElements(){
+		
 		
 		var playerImage = new Image();
 		playerImage.src = "./images/bill.png";
@@ -58,18 +72,17 @@ var main = (function(){
 	      
 	      
 	      player.onGround = false;
-	      console.log(player.onGround);
 	      
 	      gameLayer.add(player);
 	      groundLayer.add(ground);
 	      stage.add(gameLayer);
 	      stage.add(groundLayer);
-	      
-	      
-	      setInterval(function(){
+	}
+	
+	function startLoop(){
+		 setInterval(function(){
 	      	update();
 	      },1000/60);
-	      
 	}
 	
 	
@@ -95,7 +108,7 @@ var main = (function(){
 	}
 	function moveScreen(){
 		groundLayer.setX(groundLayer.getX() - speed);
-		console.log("GROUND LAYER POSITION: " + groundLayer.getX());
+		//console.log("GROUND LAYER POSITION: " + groundLayer.getX());
 	}
 	
 	function dropPlayer(){
