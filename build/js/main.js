@@ -3,7 +3,8 @@ var main = (function(){
 	var stage;
 	var gameLayer,
 		groundLayer,
-		skyLayer;
+		skyLayer,
+		cloudLayer;
 	
 	
 	var player,
@@ -13,15 +14,11 @@ var main = (function(){
 		speed = 5;
 	
 	function init(){
-		
-		
 		input.addKeyListeners();
 		createStage();
 		addBackground();
 		addGameElements();
 		startLoop();
-		
-		
 	}
 	
 	function createStage(){
@@ -33,10 +30,18 @@ var main = (function(){
 		
 		gameLayer = new Kinetic.Layer();
 		groundLayer = new Kinetic.Layer();
+		skyLayer = new Kinetic.Layer();
+		cloudLayer = new Kinetic.Layer();
 
 	}
 	
 	function addBackground(){
+		
+		
+		if(background.drawBackground != null){
+			cloudLayer.add(background.drawBackground());
+		}
+		
 		
 	}
 	
@@ -115,6 +120,9 @@ var main = (function(){
 		player.setY(player.getY() + gravity);
 	}
 	
+	function getStage(){
+		return stage;
+	}
 	
 	function collides(a, b){
 		if (a!= undefined && b!= undefined){
