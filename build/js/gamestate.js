@@ -126,7 +126,9 @@ var gamestate = (function(){
 	      stage.add(background.drawBackground()[0]);
 	      stage.add(gameLayer);
 	      stage.add(ground.groundLayer);
+	      ground.groundLayer.setZIndex(0);
 	      stage.add(guiLayer);
+	      guiLayer.setZIndex(10000);
 	}
 
 	function update(){

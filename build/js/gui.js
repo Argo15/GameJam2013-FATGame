@@ -11,12 +11,20 @@ var gui = (function(){
 		calsBurnedBackground;
 		
 	var calories = 0;
-		
+	
+	var mutebtn,
+		helpbtn;
+	
+	var soundoffsrc;
+	var soundonsrc;
+	
 	
 	var heartRateX = 1000;
 	
-	function drawGui(){
-		//console.log("DRAWING GUI");
+	function drawGui(){		
+		
+		$('#overlayUI').addClass("active");
+		
 		
 		guiLayer = new Kinetic.Layer();
 		
@@ -81,13 +89,25 @@ var gui = (function(){
 			monitor.start();
 		}
 		
+		$("#muteButton").bind('click', function(){
+			if(muted){
+				muted = false;
+				$("#muteButton").addClass("sound")
+			} else if(!muted){
+				muted = true;
+				$("#muteButton").removeClass("sound")
+			}
+			console.log(muted);
+			
+		});
 		
 		
 		guiLayer.add(calsBurnedBackground);
 		guiLayer.add(calsBurnedText);
 		guiLayer.add(calsBurnedTitle);
+		
 		guiLayer.add(heartText);
-		//console.log(guiLayer);
+		
 		return guiLayer;
 	}
 	
