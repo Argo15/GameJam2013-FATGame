@@ -1,7 +1,7 @@
 var Path = 
 {
-    nNumSamples: 1000,
-    nBlurPasses: 1000,
+    nNumSamples: 400,
+    nBlurPasses: 50,
     nPathHeights: new Array(),
 
     initialize: function() 
@@ -49,10 +49,13 @@ var Path =
         }
     },
     
-    // get height for position between 0.0 and 1.0
-    getHeight: function(position)
+    getHeight: function(index)
     {
-        var index = position * this.nNumSamples-1;
-        return this.nPathHeights[index];
+        var height = this.nPathHeights[index] * 1500;
+        if (height > 300)
+        {
+            height = 300;
+        }
+        return height;
     },
 };

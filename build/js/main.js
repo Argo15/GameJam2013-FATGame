@@ -45,6 +45,7 @@ var main = (function(){
 	
 	function addGround(){
 
+        Path.initialize();
 		ground.setStage(stage);
 
 		ground.drawGround();
@@ -76,7 +77,7 @@ var main = (function(){
 	      	x: 0,
 	        y: 400,
 	        width: 60000,
-	        height: 100,
+	        height: 0,
 	        fill: 'green',
 	      })
 
@@ -97,32 +98,23 @@ var main = (function(){
 
 
 	function update(){
-		if(collides(player, groundObject)){
-			player.onGround = true;
-		} else {
-			player.onGround = false;
-		}
-
-
-		if(!player.onGround){
-			dropPlayer();
-		}
-
+		movePlayer();
 		moveScreen();
-
-
-
-
 
 		stage.draw();
 	}
+	
 	function moveScreen(){
 		groundLayer.setX(groundLayer.getX() - speed);
 		//console.log("GROUND LAYER POSITION: " + groundLayer.getX());
 	}
 
-	function dropPlayer(){
-		player.setY(player.getY() + gravity);
+	function movePlayer(){
+		if (groundLayer.getX() > -29500)
+		{
+		    var index = Path.nNumSamples * -((groundLayer.getX()-400) / 30000);
+            player.setY(400 - Path.getHeight(Math.floor(index)));
+        }
 	}
 
 	function getStage(){
