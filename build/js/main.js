@@ -8,7 +8,7 @@ var main = (function(){
 	
 	
 	var player,
-		ground;
+		groundObject;
 	
 	var gravity = 10,
 		speed = 5;
@@ -17,6 +17,7 @@ var main = (function(){
 		input.addKeyListeners();
 		createStage();
 		addBackground();
+		addGround();
 		addGameElements();
 		startLoop();
 	}
@@ -42,6 +43,14 @@ var main = (function(){
 		
 	}
 	
+	function addGround(){
+
+		ground.setStage(stage);
+
+		ground.drawGround();
+		groundLayer = ground.getGround();
+	}
+	
 	function addGameElements(){
 		
 		
@@ -64,7 +73,7 @@ var main = (function(){
 	      }
 	      
 	      
-	      ground = new Kinetic.Rect({
+	      groundObject = new Kinetic.Rect({
 	      	x: 0,
 	        y: 400,
 	        width: 60000,
@@ -76,7 +85,7 @@ var main = (function(){
 	      player.onGround = false;
 	      
 	      gameLayer.add(player);
-	      groundLayer.add(ground);
+	      groundLayer.add(groundObject);
 	      stage.add(gameLayer);
 	      stage.add(groundLayer);
 	}
@@ -89,7 +98,7 @@ var main = (function(){
 	
 	
 	function update(){
-		if(collides(player, ground)){
+		if(collides(player, groundObject)){
 			player.onGround = true;
 		} else {
 			player.onGround = false;
@@ -147,6 +156,7 @@ var main = (function(){
 	
 	return{
 		init:init,
+		getStage:getStage,
 	}
 	
 		
