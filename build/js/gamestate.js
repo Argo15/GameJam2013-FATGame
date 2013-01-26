@@ -21,6 +21,14 @@ var gamestate = (function(){
 		F:70,
 		T:84,
 	};
+	
+	var fKeyDown = false;
+	var aKeyDown = false;
+	var tKeyDown = false;
+	
+	var fKeyInit = false;
+	var aKeyInit = false;
+	var tKeyInit = false;
 
 	//Game Variables
 	var heartRate = 50,
@@ -45,6 +53,10 @@ var gamestate = (function(){
 		addGround();
 		addGui();
 		addGameElements();
+		
+		setInterval(function(){
+			heartRate -= 1;
+		},1000)
 	}
 
 	function addGui(){
@@ -142,14 +154,58 @@ var gamestate = (function(){
 		ground.drawGround(index-6, index+13);
 		movePlayer();
 		moveScreen();
+		checkCurrentRequirement();
 
 		updateVariables();
 
 		stage.draw();
 	}
+	
+	function checkCurrentRequirement(){
+		
+		
+		
+		if (angle <= 184 && !fKeyInit){
+			fKeyInit = true;
+			setTimeout(function(){
+				if(fKeyDown == false){
+					heartRate += 5;
+				} else {
+				}
+				fKeyInit = false;
+				fKeyDown = false;
+			}, 400);
+		}
+		
+		if((angle >= 205) && (angle <= 214) && !aKeyInit){
+			aKeyInit = true;
+			setTimeout(function(){
+				if(aKeyDown == false){
+					heartRate += 5;
+				} else {
+				}
+				aKeyInit = false;
+				aKeyDown = false;
+			}, 400);
+		}
+		
+		if(angle >= 234 && !tKeyInit){
+			tKeyInit = true;
+			setTimeout(function(){
+				if(tKeyDown == false){
+					heartRate += 5;
+				} else {
+					
+				}
+				console.log("GG UNINSTALL");
+				tKeyInit = false;
+				tKeyDown = false;
+			}, 400);
+		}
+	}
 
 	function updateVariables(){
-		heartRate -= .1;
+		//heartRate -= .1;
 
 		if(angleMode == "increase"){
 			angle += 1;
@@ -181,13 +237,13 @@ var gamestate = (function(){
 		if (ground.groundLayer.getX() > -29500)
 		{
 		    var index = Path.nNumSamples * -((ground.groundLayer.getX()-400) / 30000);
-            player.setY(400 - Path.getHeight(Math.floor(index)));
+            player.setY(410 - Path.getHeight(Math.floor(index)));
         }
         else
         {
-        	mySnd.stop();
+        	//mySnd.stop();
             stage.remove();
-            currentstate.init();
+            //currentstate.init();
         }
 	}
 
@@ -199,45 +255,45 @@ var gamestate = (function(){
 		if(input == KEY.F){
 			//Right Foot
 			playerClass.operateMovement("right");
-			if (angle <= 184){
-				console.log("GOODHIT")
-				speed += 1;
-				heartRate += 10;
+			if (angle <= 184 && !fKeyDown){
+				fKeyDown = true;
 			} else {
 				console.log("BAD");
-				speed -= 1;
-				heartRate -= 10;
+				//speed -= 1;
+				
 			}
 
 		} else if(input == KEY.A){
 			//Left Foot
 			playerClass.operateMovement("left");
-			if((angle >= 205) && (angle <= 214)){
+			if((angle >= 205) && (angle <= 214) && !aKeyDown){
 				console.log("GOODHIT")
-				speed += 1;
-				heartRate += 10;
+				aKeyDown = true;
+
 			} else {
 				console.log("BAD");
-				speed -= 1;
-				heartRate -= 10;
+
 			}
 
 		} else if(input == KEY.T){
 			//Breath
 			playerClass.operateBreathing();
-			if(angle >= 234){
+			if(angle >= 234 && !tKeyDown){
 				console.log("GOODHIT")
-				speed += 1;
-				heartRate += 10;
+				tKeyDown = true;
+
 			} else {
 				console.log("BAD");
-				speed -= 1;
-				heartRate -= 10;
+
 			}
 		}
 
 		if(speed < 1){
 			speed = 1;
+		}
+		
+		if(speed > 20){
+			speed = 20
 		}
 	}
 
