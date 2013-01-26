@@ -13,13 +13,13 @@ var input = (function(){
 			var keyLetter;
 			switch(e.keyCode){
 				case KEY.A:
-					main.setInput(e.keyCode);
+					gamestate.setInput(e.keyCode);
 					break;
 				case KEY.F:
 					main.setInput(e.keyCode);
-					break;
+					gamestate;
 				case KEY.T:
-					main.setInput(e.keyCode);
+					gamestate.setInput(e.keyCode);
 					break;
 			}
 			
