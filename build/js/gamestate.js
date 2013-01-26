@@ -521,7 +521,7 @@ var gamestate = (function(){
 			 	mySnd.stop();
 				 heartRate = 00;
 				 angleInc = 1;
-				 speed = 0;
+				 speed = 5;
 				 $("#heartAttack").css("opacity", "0");
 			 	 stage.remove();
 		         currentstate = scorestate;
