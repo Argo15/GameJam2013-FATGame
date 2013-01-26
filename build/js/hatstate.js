@@ -1,6 +1,7 @@
 var hatstate = (function()
 {
 	var stage;
+	var selectedHatFrame;
 	var skyLayer,
 		cloudLayer,
 		buttonLayer,
@@ -43,70 +44,155 @@ var hatstate = (function()
 	   hat1Img.src = "./images/hat1.png";
 	   var hat1Button = new Kinetic.Image({
 			x: 125,
-			y: 125,
+			y: 261,
 			image: hat1Img,
 			width: 198,
 			height: 360,
 		});
 		
 		hat1Button.on('click', function() {
-            hatPath = "./images/hat1.png";
+			if(hatPath == "./images/hat1.png") {
+				hatPath = null;
+            	hat1Button.setStroke(null);
+            	hat1Button.setStrokeWidth(null);
+			} else {
+            	hatPath = "./images/hat1.png";
+            	hat1Button.setStroke('purple');
+            	hat1Button.setStrokeWidth(10);
+            
+            	hat2Button.setStroke(null);
+            	hat2Button.setStrokeWidth(null);
+            	hat3Button.setStroke(null);
+            	hat3Button.setStrokeWidth(null);
+            	hat4Button.setStroke(null);
+            	hat4Button.setStrokeWidth(null);
+            	hat5Button.setStroke(null);
+            	hat5Button.setStrokeWidth(null);
+            }
         });
         
        	var hat2Img = new Image();
 	   	hat2Img.src = "./images/hat2.png";
 	   	var hat2Button = new Kinetic.Image({
 			x: 333,
-			y: 125,
+			y: 261,
 			image: hat2Img,
 			width: 198,
 			height: 360,
 		});
 		
 		hat2Button.on('click', function() {
-            hatPath = "./images/hat2.png";
+			if(hatPath == "./images/hat2.png") {
+				hatPath = null;
+            	hat2Button.setStroke(null);
+            	hat2Button.setStrokeWidth(null);
+			} else {
+            	hatPath = "./images/hat2.png";
+            	hat2Button.setStroke('purple');
+				hat2Button.setStrokeWidth(10);
+            
+            	hat1Button.setStroke(null);
+            	hat1Button.setStrokeWidth(null);
+            	hat3Button.setStroke(null);
+            	hat3Button.setStrokeWidth(null);
+            	hat4Button.setStroke(null);
+            	hat4Button.setStrokeWidth(null);
+            	hat5Button.setStroke(null);
+            	hat5Button.setStrokeWidth(null);
+            }
         });
         
         var hat3Img = new Image();
 	   	hat3Img.src = "./images/hat3.png";
 	   	var hat3Button = new Kinetic.Image({
 			x: 541,
-			y: 125,
+			y: 261,
 			image: hat3Img,
 			width: 198,
 			height: 360,
 		});
 		
 		hat3Button.on('click', function() {
-            hatPath = "./images/hat3.png";
+			if(hatPath == "./images/hat3.png") {
+				hatPath = null;
+            	hat3Button.setStroke(null);
+            	hat3Button.setStrokeWidth(null);
+			} else {
+            	hatPath = "./images/hat3.png";
+            	hat3Button.setStroke('purple');
+            	hat3Button.setStrokeWidth(10);
+            
+            	hat1Button.setStroke(null);
+            	hat1Button.setStrokeWidth(null);
+            	hat2Button.setStroke(null);
+            	hat2Button.setStrokeWidth(null);
+            	hat4Button.setStroke(null);
+            	hat4Button.setStrokeWidth(null);
+            	hat5Button.setStroke(null);
+            	hat5Button.setStrokeWidth(null);
+            }
         });
         
         var hat4Img = new Image();
 	   	hat4Img.src = "./images/hat4.png";
 	   	var hat4Button = new Kinetic.Image({
 			x: 749,
-			y: 125,
+			y: 261,
 			image: hat4Img,
 			width: 198,
 			height: 360,
 		});
 		
 		hat4Button.on('click', function() {
-            hatPath = "./images/hat4.png";
+			if(hatPath == "./images/hat4.png") {
+				hatPath = null;
+            	hat4Button.setStroke(null);
+            	hat4Button.setStrokeWidth(null);
+			} else {
+            	hatPath = "./images/hat4.png";
+            	hat4Button.setStroke('purple');
+            	hat4Button.setStrokeWidth(10);
+            
+            	hat1Button.setStroke(null);
+            	hat1Button.setStrokeWidth(null);
+            	hat2Button.setStroke(null);
+            	hat2Button.setStrokeWidth(null);
+            	hat3Button.setStroke(null);
+            	hat3Button.setStrokeWidth(null);
+            	hat5Button.setStroke(null);
+            	hat5Button.setStrokeWidth(null);
+            }
         });
         
         var hat5Img = new Image();
 	   	hat5Img.src = "./images/hat5.png";
 	   	var hat5Button = new Kinetic.Image({
 			x: 957,
-			y: 125,
+			y: 261,
 			image: hat5Img,
 			width: 198,
 			height: 360,
 		});
 		
 		hat5Button.on('click', function() {
-            hatPath = "./images/hat5.png";
+			if(hatPath == "./images/hat5.png") {
+				hatPath = null;
+            	hat5Button.setStroke(null);
+            	hat5Button.setStrokeWidth(null);
+			} else {
+           		hatPath = "./images/hat5.png";
+            	hat5Button.setStroke('purple');
+            	hat5Button.setStrokeWidth(10);
+            
+            	hat1Button.setStroke(null);
+            	hat1Button.setStrokeWidth(null);
+            	hat2Button.setStroke(null);
+            	hat2Button.setStrokeWidth(null);
+            	hat3Button.setStroke(null);
+            	hat3Button.setStrokeWidth(null);
+            	hat4Button.setStroke(null);
+            	hat4Button.setStrokeWidth(null);
+            }
         });
 		
 		hatLayer.add(hat1Button);
@@ -142,15 +228,15 @@ var hatstate = (function()
 	   var returnImg = new Image();
 	   returnImg.src = "./images/returnbutton.png";
 	   var returnButton = new Kinetic.Image({
-			x: stage.getWidth()/2,
-			y: 375,
+			x: 10,
+			y: stage.getHeight(),
 			image: returnImg,
-			width: 500,
-			height: 250,
+			width: 216,
+			height: 144,
 		});
 		
 		returnButton.setOffset({
-      		x: returnButton.getWidth() / 2
+      		y: returnButton.getHeight()
       	});
 	      
 	    buttonLayer.add(returnButton);
