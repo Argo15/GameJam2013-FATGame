@@ -145,7 +145,7 @@ var gui = (function(){
 	
 	function setHeartRate(amt){
 		if(amt < 1){
-			amt = 1;
+			amt = 2;
 			//console.log("GAME IS OVER");
 		}
 		calories += amt/1000;
