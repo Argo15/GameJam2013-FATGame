@@ -81,19 +81,13 @@ var menustate = (function()
        var hatImg = new Image();
 	   hatImg.src = "./images/hat4.png";
 	   var hatButton = new Kinetic.Image({
-			x: 100,
-			y: 100,
+			x: -20,
+			y: 560,
 			image: hatImg,
 			width: 198,
 			height: 360,
 		});
-		
-/*
-        hatButton.setOffset({
-      		x: hatButton.getWidth(),
-      		y: hatButton.getHeight()
-      	});
-*/
+
       	hatButton.on('click', function() {
             stage.remove();
             currentstate = hatstate;
