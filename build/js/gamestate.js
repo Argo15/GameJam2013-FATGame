@@ -28,6 +28,8 @@ var gamestate = (function(){
 	var aKeyDown = false;
 	var tKeyDown = false;
 	
+	var badKeyDown = false;
+	
 	var fKeyInit = false;
 	var aKeyInit = false;
 	var tKeyInit = false;
@@ -433,11 +435,6 @@ var gamestate = (function(){
 			playerClass.operateMovement("right");
 			if (angle <= 187 && !fKeyDown){
 				fKeyDown = true;
-			} else if (!fKeyDown) {
-			    heartRate += 5;
-				console.log("BAD");
-				//speed -= 1;
-				fKeyDown = true;
 			}
 
 		} else if(input == KEY.A){
@@ -447,11 +444,7 @@ var gamestate = (function(){
 				console.log("GOODHIT")
 				aKeyDown = true;
 
-			} else if (!aKeyDown) {
-			    heartRate += 5;
-				console.log("BAD");
-                aKeyDown = true;
-			}
+			} 
 
 		} else if(input == KEY.T){
 			//Breath
@@ -460,13 +453,21 @@ var gamestate = (function(){
 				console.log("GOODHIT")
 				tKeyDown = true;
 
-			} else if (!tKeyDown) {
-			    heartRate += 5;
-			    tKeyDown = true;
-				console.log("BAD");
-
 			}
 		}
+		
+		if (input == KEY.F || input == KEY.A || input == KEY.T)
+		{
+		    if (!badKeyDown && ((angle > 187 && angle < 203) || (angle > 216 && angle < 232))) {
+		        heartRate += 5;
+			    console.log("BAD");
+                badKeyDown = true;
+                setTimeout(function(){
+                    badKeyDown = false;
+			    }, 100);
+                combo = 0;
+	        }
+	    }
 
 		if(speed < 1){
 			speed = 1;
