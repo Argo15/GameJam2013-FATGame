@@ -228,6 +228,7 @@ var main = (function(){
 		init:init,
 		setInput:setInput,
 		getStage:getStage,
+		getAngle:getAngle,
 	}
 
 
