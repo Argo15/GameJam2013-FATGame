@@ -268,7 +268,7 @@ var gamestate = (function(){
 			    if (fKeyPressedOnce)
 			    {
 				    if(fKeyDown == false){
-					    heartRate += 10;
+					    heartRate += 5;
 					    combo = 0;
 					    createBadText()
 				    } else {
@@ -286,7 +286,7 @@ var gamestate = (function(){
 			aKeyInit = true;
 			setTimeout(function(){
 				if(aKeyDown == false){
-					heartRate += 10;
+					heartRate += 5;
 					combo = 0;
 					createBadText()
 				} else {
@@ -303,7 +303,7 @@ var gamestate = (function(){
 			tKeyInit = true;
 			setTimeout(function(){
 				if(tKeyDown == false){
-					heartRate += 10;
+					heartRate += 5;
 					combo = 0;
 					createBadText()
 				} else {
@@ -383,7 +383,7 @@ var gamestate = (function(){
 		//heartRate -= .1;
 		if(fKeyPressedOnce)
 		{
-		    angleInc += .002;
+		    angleInc += .001;
 		}
 		if(fKeyPressedOnce && angleMode == "increase"){
 			angle += angleInc;
@@ -468,21 +468,21 @@ var gamestate = (function(){
 		    $("#startPrompt").css("display", "none");
 			//Right Foot
 			playerClass.operateMovement("right");
-			if (angle <= 187 && !fKeyDown){
+			if (angle <= 190 && !fKeyDown){
 				fKeyDown = true;
 			}
 
 		} else if(input == KEY.A){
 			//Left Foot
 			playerClass.operateMovement("left");
-			if((angle >= 203) && (angle <= 216) && !aKeyDown){
+			if((angle >= 200) && (angle <= 218) && !aKeyDown){
 				aKeyDown = true;
 			} 
 
 		} else if(input == KEY.T){
 			//Breath
 			playerClass.operateBreathing();
-			if(angle >= 232 && !tKeyDown){
+			if(angle >= 228 && !tKeyDown){
 				tKeyDown = true;
 			}
 		}
@@ -493,6 +493,7 @@ var gamestate = (function(){
 		        heartRate += 5;
 			    console.log("BAD");
                 badKeyDown = true;
+			    createBadText();
                 setTimeout(function(){
                     badKeyDown = false;
 			    }, 200);
