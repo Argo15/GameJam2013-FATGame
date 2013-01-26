@@ -7,7 +7,7 @@ var main = (function(){
 	var player,
 		ground;
 	
-	
+	var gravity = 10;
 	
 	function init(){
 		
@@ -42,7 +42,8 @@ var main = (function(){
 	      })
 	      
 	      
-	      
+	      player.onGround = false;
+	      console.log(player.onGround);
 	      
 	      gameLayer.add(player);
 	       gameLayer.add(ground);
@@ -57,17 +58,26 @@ var main = (function(){
 	
 	
 	function update(){
-		console.log("RUNNING");
-		
-		
 		if(collides(player, ground)){
-			console.log("OUCH");
+			player.onGround = true;
+		} else {
+			player.onGround = false;
 		}
 		
 		
-		player.setY(player.getY() + 1);
+		if(!player.onGround){
+			dropPlayer();
+		}
+		
+		
+		
 		
 		stage.draw();
+	}
+	
+	
+	function dropPlayer(){
+		player.setY(player.getY() + gravity);
 	}
 	
 	
