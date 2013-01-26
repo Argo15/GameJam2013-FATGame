@@ -22,7 +22,8 @@ var gamestate = (function(){
 		T:84,
 	};
 	
-	var changedAnim = true;
+	var changedAnim = false;
+	var currentAnim = "good";
 	
 	var fKeyDown = false;
 	var aKeyDown = false;
@@ -201,8 +202,25 @@ var gamestate = (function(){
 
 		guiLayer.add(metronomeBackground);
 		guiLayer.add(metronomeArrow);
+		
+		var pHatObject = new Image();
+		pHatObject.src = hatPath;
+		var playerHat = new Kinetic.Image({
+			x: player.getX() + 270,
+			y: player.getY() - 300,
+			image: pHatObject,
+			width: 135,
+			height: 139,
+			offset: {x:100, y:100},
+		});
+		
+		console.log(playerHat);
+		
+		
+		
 
 	      gameLayer.add(player);
+	      gameLayer.add(playerHat);
 	      stage.add(background.drawBackground()[0]);
 	      stage.add(gameLayer);
 	      stage.add(ground.groundLayer);
@@ -352,7 +370,7 @@ var gamestate = (function(){
 		//heartRate -= .1;
 		if(fKeyPressedOnce)
 		{
-		    angleInc += .001;
+		    angleInc += .002;
 		}
 		if(fKeyPressedOnce && angleMode == "increase"){
 			angle += angleInc;
@@ -382,12 +400,14 @@ var gamestate = (function(){
 			heartRate = 100;
 		}
 		
-		if(heartRate < 200 && !changedAnim){
+		if(heartRate < 200 && !changedAnim && currentAnim != "good"){
 			gui.setAnim("good");
+			currentAnim = "good";
 		} 
 		
-		if(heartRate > 200 && !changedAnim){
-			gui.setAnim("bad")
+		if(heartRate > 200 && !changedAnim && currentAnim != "bad"){
+			gui.setAnim("bad");
+			currentAnim = "bad";
 		}
 		
 	}
@@ -441,30 +461,26 @@ var gamestate = (function(){
 			//Left Foot
 			playerClass.operateMovement("left");
 			if((angle >= 203) && (angle <= 216) && !aKeyDown){
-				console.log("GOODHIT")
 				aKeyDown = true;
-
 			} 
 
 		} else if(input == KEY.T){
 			//Breath
 			playerClass.operateBreathing();
 			if(angle >= 232 && !tKeyDown){
-				console.log("GOODHIT")
 				tKeyDown = true;
-
 			}
 		}
 		
 		if (input == KEY.F || input == KEY.A || input == KEY.T)
 		{
-		    if (!badKeyDown && ((angle > 187 && angle < 203) || (angle > 216 && angle < 232))) {
+		    if (!badKeyDown && ((angle > 190 && angle < 200) || (angle > 218 && angle < 228))) {
 		        heartRate += 5;
 			    console.log("BAD");
                 badKeyDown = true;
                 setTimeout(function(){
                     badKeyDown = false;
-			    }, 100);
+			    }, 200);
                 combo = 0;
 	        }
 	    }

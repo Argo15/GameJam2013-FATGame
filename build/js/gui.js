@@ -18,6 +18,8 @@ var gui = (function(){
 	var soundoffsrc;
 	var soundonsrc;
 	
+	var currentAnim = "good";
+	
 	
 	var heartRateX = 1000;
 	
@@ -79,7 +81,7 @@ var gui = (function(){
 			x:850,
 			y:20,
 			image:monitorSrc,
-			animation:'good',
+			animation:currentAnim,
 			animations: setupAnimations(),
 			frameRate: 7
 		});
@@ -128,13 +130,14 @@ var gui = (function(){
 	
 	function setAnim(anim){
 		monitor.setAnimation(anim);
+		currentAnim = anim;
 	}
 	
 	
 	function setupAnimations(){
 		var animations = {
 			good: getAnimationArray(8, 0),
-			bad: getAnimationArray(8, 4),
+			bad: getAnimationArray(8, 8),
 		}
         
         return animations;
