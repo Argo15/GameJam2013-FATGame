@@ -2,7 +2,6 @@ var gamestate = (function(){
 
 	var stage;
 	var gameLayer,
-		groundLayer,
 		skyLayer,
 		cloudLayer,
 		guiLayer;
@@ -38,8 +37,6 @@ var gamestate = (function(){
 		addGround();
 		addGui();
 		addGameElements();
-		
-		startLoop();
 	}
 	
 	function addGui(){
@@ -54,7 +51,6 @@ var gamestate = (function(){
 		});
 
 		gameLayer = new Kinetic.Layer();
-		groundLayer = new Kinetic.Layer();
 		
 		cloudLayer = new Kinetic.Layer();
 		guiLayer = new Kinetic.Layer();
@@ -73,9 +69,6 @@ var gamestate = (function(){
 
         Path.initialize();
 		ground.setStage(stage);
-
-		ground.drawGround();
-		groundLayer = ground.getGround();
 	}
 	
 	function addGameElements(){
@@ -98,15 +91,6 @@ var gamestate = (function(){
 	      playerImage.onload= function(){
 	      	player.start();
 	      }
-	      
-	      groundObject = new Kinetic.Rect({
-	      	x: 0,
-	        y: 400,
-	        width: 60000,
-	        height: 0,
-	        fill: 'green',
-	      })
-
 
 	      player.onGround = false;
 
@@ -136,14 +120,15 @@ var gamestate = (function(){
 		guiLayer.add(metronomeArrow);
 
 	      gameLayer.add(player);
-	      groundLayer.add(groundObject);
 	      stage.add(background.drawBackground()[0]);
 	      stage.add(gameLayer);
-	      stage.add(groundLayer);
 	      stage.add(guiLayer);
+	      stage.add(ground.groundLayer);
 	}
 
 	function update(){
+	    var index = Math.floor(Path.nNumSamples * -((ground.groundLayer.getX()-400) / 30000));
+	    ground.drawGround(index-6, index+13);
 		movePlayer();
 		moveScreen();
 
@@ -176,14 +161,14 @@ var gamestate = (function(){
 	}
 	
 	function moveScreen(){
-		groundLayer.setX(groundLayer.getX() - speed);
+		ground.groundLayer.setX(ground.groundLayer.getX() - speed);
 		//console.log("GROUND LAYER POSITION: " + groundLayer.getX());
 	}
 
 	function movePlayer(){
-		if (groundLayer.getX() > -29500)
+		if (ground.groundLayer.getX() > -29500)
 		{
-		    var index = Path.nNumSamples * -((groundLayer.getX()-400) / 30000);
+		    var index = Path.nNumSamples * -((ground.groundLayer.getX()-400) / 30000);
             player.setY(400 - Path.getHeight(Math.floor(index)));
         }
         else
