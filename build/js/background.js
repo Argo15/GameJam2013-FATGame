@@ -72,7 +72,7 @@ var background = (function(){
                 return function(){
                     getNewValues();
                     yoda.setScale(xSpeed, xSpeed);
-                    yoda.setZIndex(Math.ceil(xSpeed) + 1);
+                    yoda.setZIndex(xSpeed + 1);
                     yoda.setX(x);
                     yoda.setY(y);
                 }

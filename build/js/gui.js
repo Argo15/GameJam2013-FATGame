@@ -10,7 +10,7 @@ var gui = (function(){
 	var heartRateX = 1000;
 	
 	function drawGui(){
-		console.log("DRAWING GUI");
+		//console.log("DRAWING GUI");
 		
 		guiLayer = new Kinetic.Layer();
 		
@@ -62,7 +62,7 @@ var gui = (function(){
 		guiLayer.add(calsBurned);
 		guiLayer.add(calsBurnedTitle);
 		guiLayer.add(heartText);
-		console.log(guiLayer);
+		//console.log(guiLayer);
 		return guiLayer;
 	}
 	
@@ -70,7 +70,7 @@ var gui = (function(){
 	function setHeartRate(amt){
 		if(amt < 1){
 			amt = 1;
-			console.log("GAME IS OVER");
+			//console.log("GAME IS OVER");
 		}
 		heartBar.setWidth(amt*2);
 		heartText.setText((Math.ceil(amt*2)) + " BPM");
