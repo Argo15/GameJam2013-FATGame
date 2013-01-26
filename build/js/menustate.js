@@ -85,7 +85,7 @@ var menustate = (function()
 			y: 560,
 			image: hatImg,
 			width: 198,
-			height: 360,
+			height: 181,
 		});
 
       	hatButton.on('click', function() {

@@ -46,8 +46,8 @@ var hatstate = (function()
 			x: 125,
 			y: 261,
 			image: hat1Img,
-			width: 198,
-			height: 360,
+			width: 193,
+			height: 181,
 		});
 		
 		hat1Button.on('click', function() {
@@ -78,7 +78,7 @@ var hatstate = (function()
 			y: 261,
 			image: hat2Img,
 			width: 198,
-			height: 360,
+			height: 181,
 		});
 		
 		hat2Button.on('click', function() {
@@ -109,7 +109,7 @@ var hatstate = (function()
 			y: 261,
 			image: hat3Img,
 			width: 198,
-			height: 360,
+			height: 180,
 		});
 		
 		hat3Button.on('click', function() {
@@ -140,7 +140,7 @@ var hatstate = (function()
 			y: 261,
 			image: hat4Img,
 			width: 198,
-			height: 360,
+			height: 181,
 		});
 		
 		hat4Button.on('click', function() {
@@ -171,7 +171,7 @@ var hatstate = (function()
 			y: 261,
 			image: hat5Img,
 			width: 198,
-			height: 360,
+			height: 181,
 		});
 		
 		hat5Button.on('click', function() {
