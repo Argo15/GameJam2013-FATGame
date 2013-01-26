@@ -32,10 +32,23 @@ var playerClass = (function(){
         }
     }
 	
+	/**
+	 * //Changes the animation
+ 	 * @param {Object} foot The foot being moved
+	 */
+	function operateMovement(foot){
+		console.log(foot);
+	}
+	
+	function operateBreathing(){
+		
+	}
 	
 	
 	return{
 		setupAnimations:setupAnimations,
+		operateMovement:operateMovement,
+		operateBreathing:operateBreathing,
 	}
 	
 	
