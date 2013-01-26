@@ -52,7 +52,7 @@ var menustate = (function()
 	        y: 510,
 	        width: 200,
 	        height: 100,
-       		fill: 'Yellow',
+       		fill: 'Yellow'
 	      });
 	      
 	    buttonLayer.add(startButtonBackground);
