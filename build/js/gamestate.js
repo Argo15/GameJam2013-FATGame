@@ -369,10 +369,11 @@ var gamestate = (function(){
 			playerClass.operateMovement("right");
 			if (angle <= 187 && !fKeyDown){
 				fKeyDown = true;
-			} else {
+			} else if (!fKeyDown) {
+			    heartRate += 5;
 				console.log("BAD");
 				//speed -= 1;
-				
+				fKeyDown = true;
 			}
 
 		} else if(input == KEY.A){
@@ -382,9 +383,10 @@ var gamestate = (function(){
 				console.log("GOODHIT")
 				aKeyDown = true;
 
-			} else {
+			} else if (!aKeyDown) {
+			    heartRate += 5;
 				console.log("BAD");
-
+                aKeyDown = true;
 			}
 
 		} else if(input == KEY.T){
@@ -394,7 +396,9 @@ var gamestate = (function(){
 				console.log("GOODHIT")
 				tKeyDown = true;
 
-			} else {
+			} else if (!tKeyDown) {
+			    heartRate += 5;
+			    tKeyDown = true;
 				console.log("BAD");
 
 			}
