@@ -1,7 +1,11 @@
 var background = (function(){
 	
+	var stage;
+	
 	function drawBackground(){
 		
+		//Change this with sprites or whatever
+		//#yolo
 		var rect = new Kinetic.Rect({
 	        x: 239,
 	        y: 75,
@@ -13,12 +17,12 @@ var background = (function(){
 	      });
 		
 		
-		return cloud;
+		return rect;
 		
 	}
 	
-	function setStage(){
-		
+	function setStage(mainStage){
+			stage = mainStage;
 	}
 	
 	

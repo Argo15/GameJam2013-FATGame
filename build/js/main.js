@@ -36,10 +36,10 @@ var main = (function(){
 	}
 
 	function addBackground(){
-
+		
 		background.setStage(stage);
 		background.drawBackground();
-
+		
 	}
 
 	function addGameElements(){
