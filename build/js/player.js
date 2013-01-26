@@ -7,16 +7,17 @@ var playerClass = (function(){
 		
 		
 		animations = {
-			walking: getAnimationArray(16)
+			walking: getAnimationArray(16, 0),
+			dying: getAnimationArray(4, 16),
 		}
 		
 		return animations;
 	}
 
-    function getAnimationArray(maxFrames){
+    function getAnimationArray(maxFrames, offset){
         var frameArray = [];
         for(var frame = 0; frame < maxFrames; frame++){
-            frameArray.push(getAnimationFrame(frame));
+            frameArray.push(getAnimationFrame(frame + offset));
         }
         return frameArray;
     }
