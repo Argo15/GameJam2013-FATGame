@@ -70,7 +70,7 @@ var gui = (function(){
 	function setHeartRate(amt){
 		if(amt < 1){
 			amt = 1;
-			console.log("GAME IS OVER");
+			//console.log("GAME IS OVER");
 		}
 		heartBar.setWidth(amt*2);
 		heartText.setText((Math.ceil(amt*2)) + " BPM");

@@ -170,6 +170,7 @@ var gamestate = (function(){
 				metronomeDirection = 1;
 			}
 		}
+		console.log(angle);
 		
 		gui.setHeartRate(heartRate);
 		metronomeArrow.rotate(.5 * (Math.PI/180) * metronomeDirection);
@@ -228,7 +229,15 @@ var gamestate = (function(){
 		} else if(input == KEY.T){
 			//Breath
 			playerClass.operateBreathing();
-			
+			if(angle > (90 - threshold)){
+				console.log("GOODHIT")
+				speed += 1;
+				heartRate += 10;
+			} else {
+				console.log("BAD");
+				speed -= 1;
+				heartRate -= 10;
+			}
 		}
 		
 		if(speed < 1){

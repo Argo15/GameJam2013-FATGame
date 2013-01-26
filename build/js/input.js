@@ -16,7 +16,7 @@ var input = (function(){
 					gamestate.setInput(e.keyCode);
 					break;
 				case KEY.F:
-					main.setInput(e.keyCode);
+					gamestate.setInput(e.keyCode);
 					gamestate;
 				case KEY.T:
 					gamestate.setInput(e.keyCode);
