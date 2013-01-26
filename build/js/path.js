@@ -51,14 +51,14 @@ var Path =
     
     getHeight: function(index)
     {
-        var height = this.nPathHeights[index] * 1500;
-        if (height > 300)
+        var height = this.nPathHeights[index] * 1500 - 100;
+        if (height > 120)
         {
-            height = 300;
+            height = 120;
         }
-        if (height < -300)
+        if (height < -270)
         {
-            height = -300;
+            height = -270;
         }
         return height;
     },

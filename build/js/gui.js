@@ -34,7 +34,8 @@ var gui = (function(){
 			text: "100 BPM",
 			fontSize: 30,
 			fontFamily: 'Calibri',
-       		fill: 'black'
+       		fill: 'black',
+            zindex: 1
 		});
 		
 		var calsBgImage = new Image();
@@ -45,6 +46,7 @@ var gui = (function(){
 			image: calsBgImage,
 			width: 507,
 			height: 111,
+            zindex: 1
 		});
 		
 		calsBurnedBackground.setScale(.8, .8);
