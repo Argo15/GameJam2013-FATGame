@@ -7,8 +7,7 @@ var main = (function(){
 		
 		
 		$("#howToPlayButton").bind("click", function(){
-			console.log("FUCK")
-			$("#howToPlayScreen").css("display", "block")
+			$("#howToPlayScreen").css("display", "block");
 			$("#shadowBox").css("display", "block");
 		});
 		

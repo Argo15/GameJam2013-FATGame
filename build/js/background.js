@@ -102,12 +102,12 @@ var background = (function(){
         cloud4Image = addLayout(cloud4Image);
         cloud5Image = addLayout(cloud5Image);
 
-        staticBackground.src = "../media/PNGS/sky3.jpg"; 
-        cloud2Image.src = "../media/PNGS/cloud2.png";
-        cloud1Image.src = "../media/PNGS/cloud1.png";
-        cloud3Image.src = "../media/PNGS/cloud3.png";
-        cloud4Image.src = "../media/PNGS/cloud4.png";
-        cloud5Image.src = "../media/PNGS/cloud5.png";
+        staticBackground.src = "images/sky3.jpg"; 
+        cloud2Image.src = "images/cloud2.png";
+        cloud1Image.src = "images/cloud1.png";
+        cloud3Image.src = "images/cloud3.png";
+        cloud4Image.src = "images/cloud4.png";
+        cloud5Image.src = "images/cloud5.png";
        
         return [layer]; 
 

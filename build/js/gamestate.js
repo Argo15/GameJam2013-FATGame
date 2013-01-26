@@ -59,6 +59,11 @@ var gamestate = (function(){
 		});
 		gui.setCalories(-1000000000000000000000);
 		mySnd.play();
+		if(!mySnd.isMuted()){
+		    $("#muteButton").removeClass("soundoff")
+		} else {
+			$("#muteButton").addClass("soundoff")
+		}
 		$("#startPrompt").css("display", "block");
 		
 		input.addKeyListeners();
@@ -612,12 +617,22 @@ var gamestate = (function(){
 	function getAngle(){
 		return angle;
 	}
+	
+	function mutePressed(){
+	    mySnd.toggleMute();
+	    if(!mySnd.isMuted()){
+		    $("#muteButton").removeClass("soundoff")
+		} else {
+			$("#muteButton").addClass("soundoff")
+		}
+	}
 
 
 	return{
 		init:init,
 		setInput:setInput,
-		update:update
+		update:update,
+		mutePressed:mutePressed,
 	}
 
 

@@ -92,19 +92,6 @@ var gui = (function(){
 			guiLayer.add(monitor);
 			monitor.start();
 		}
-		
-		$("#muteButton").bind('click', function(){
-			if(muted){
-				muted = false;
-				$("#muteButton").removeClass("soundoff")
-			} else if(!muted){
-				muted = true;
-				$("#muteButton").addClass("soundoff")
-				
-			}
-			console.log(muted);
-			
-		});
 
         $("#helpButton").bind('click', (function(){
             toggled = false;
