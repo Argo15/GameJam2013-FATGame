@@ -26,9 +26,9 @@ var background = (function(){
                 y: 0,
                 image: staticBackground,
                 width: 1280,
-                height: 720
-            });
-            
+                height: 720,
+                zindex: 0
+            }); 
             layer.add(yoda);
 		}
 
@@ -38,26 +38,69 @@ var background = (function(){
         var cloud4Image = new Image();
         var cloud5Image = new Image();
 
-        function addLayout(cloudImage){
+        function getLayoutFunction(){
             var width = 192;
-            var height = 129
-            cloudImage.onLoad = function(){
-                var yoda = new Kinetic.Image({
-                    x: width,
-                    y: height,
-                    image: cloudImage,
-                    height: height,
-                    width: width
-                });
-                layout.add(yoda);
+            var height = 129;
+
+            function updateX(yoda){
+                var screenWidth = 1280 + width; 
+                var screenHeight = 400;
+                var y = getNewY();
+                var x = screenWidth; 
+
+                var xSpeed = getNewSpeed();
+
+                function getNewY(){
+                    return Math.random() * screenHeight; 
+                }
+
+                function getNewSpeed(){
+                    return Math.random() * 3;
+                }
+
+                function getNewValues(){
+                    if(x < (width * -1 * xSpeed)){
+                        y = getNewY();
+                        x = screenWidth;
+                        xSpeed = getNewSpeed();
+    
+                    } else {
+                        x -= xSpeed;
+                    }
+                }
+
+                return function(){
+                    getNewValues();
+                    yoda.setScale(xSpeed, xSpeed);
+                    yoda.setZIndex(Math.ceil(xSpeed) + 1);
+                    yoda.setX(x);
+                    yoda.setY(y);
+                }
             }
+
+            return function(cloudImage){
+                cloudImage.onload = function(){
+                    var yoda = new Kinetic.Image({
+                        x: width * -1,
+                        y: height * -1,
+                        image: cloudImage,
+                        height: height,
+                        width: width
+                    });
+                    layer.add(yoda);
+                    setInterval(updateX(yoda), 16);
+                }
+                return cloudImage;
+            };
         };
+
+        var addLayout = getLayoutFunction();
       
-        addLayout(cloud1Image);
-        addLayout(cloud2Image);
-        addLayout(cloud3Image);
-        addLayout(cloud4Image);
-        addLayout(cloud5Image);
+        cloud1Image = addLayout(cloud1Image);
+        cloud2Image = addLayout(cloud2Image);
+        cloud3Image = addLayout(cloud3Image);
+        cloud4Image = addLayout(cloud4Image);
+        cloud5Image = addLayout(cloud5Image);
 
         staticBackground.src = "../media/PNGS/sky3.jpg"; 
         cloud2Image.src = "../media/PNGS/cloud2.png";
