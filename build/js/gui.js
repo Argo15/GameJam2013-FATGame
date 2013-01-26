@@ -4,6 +4,9 @@ var gui = (function(){
 	var heartBar,
 		heartText;
 	
+	var calsBurned,
+		calsBurnedTitle;
+	
 	var heartRateX = 1000;
 	
 	function drawGui(){
@@ -15,6 +18,25 @@ var gui = (function(){
 			x:heartRateX + 80,
 			y:80,
 			text: "100 BPM",
+			fontSize: 30,
+			fontFamily: 'Calibri',
+       		fill: 'black'
+		});
+		
+		calsBurnedTitle = new Kinetic.Text({
+			x:910,
+			y:130,
+			text: "Calories Burned:",
+			  fontSize: 30,
+			fontFamily: 'Calibri',
+       		fill: 'black'
+		})
+		
+		calsBurned = new Kinetic.Text({
+			x:1130,
+			y:130,
+			text: "200",
+			  fontSize: 40,
 			fontFamily: 'Calibri',
        		fill: 'black'
 		})
@@ -37,6 +59,8 @@ var gui = (function(){
 		
 		guiLayer.add(heartBackground);
 		guiLayer.add(heartBar);
+		guiLayer.add(calsBurned);
+		guiLayer.add(calsBurnedTitle);
 		guiLayer.add(heartText);
 		console.log(guiLayer);
 		return guiLayer;
