@@ -17,8 +17,8 @@ var gui = (function(){
 		guiLayer = new Kinetic.Layer();
 		
 		heartText = new Kinetic.Text({
-			x:heartRateX + 80,
-			y:80,
+			x:heartRateX + 10,
+			y:160,
 			text: "100 BPM",
 			fontSize: 30,
 			fontFamily: 'Calibri',
@@ -27,7 +27,7 @@ var gui = (function(){
 		
 		calsBurnedTitle = new Kinetic.Text({
 			x:910,
-			y:130,
+			y:190,
 			text: "Calories Burned:",
 			  fontSize: 30,
 			fontFamily: 'Calibri',
@@ -36,7 +36,7 @@ var gui = (function(){
 		
 		calsBurned = new Kinetic.Text({
 			x:1130,
-			y:130,
+			y:190,
 			text: "200",
 			  fontSize: 40,
 			fontFamily: 'Calibri',
@@ -48,20 +48,24 @@ var gui = (function(){
 		monitorSrc.src="./images/heartbeat.png";
 		
 		monitor = new Kinetic.Sprite({
-			x:900,
-			y:40,
+			x:850,
+			y:20,
 			image:monitorSrc,
 			animation:'idle',
 			animations: setupAnimations(),
-			frameRate: 2
+			frameRate: 7
 		});
+		monitor.setScale(.8,.5);
 		
 		
 		monitorSrc.onload = function(){
 			guiLayer.add(monitor);
 			monitor.start();
 		}
-			
+		
+		
+		
+		
 		guiLayer.add(calsBurned);
 		guiLayer.add(calsBurnedTitle);
 		guiLayer.add(heartText);
@@ -103,6 +107,7 @@ var gui = (function(){
 			amt = 1;
 			//console.log("GAME IS OVER");
 		}
+		
 		//heartBar.setWidth(amt*2);
 		heartText.setText((Math.ceil(amt*2)) + " BPM");
 	}
