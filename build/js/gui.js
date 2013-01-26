@@ -103,6 +103,18 @@ var gui = (function(){
 			console.log(muted);
 			
 		});
+
+        $("#helpButton").bind('click', (function(){
+            toggled = false;
+            return function(){
+                if(!toggled){
+                    $("#tutorial").show();
+                } else {
+                    $("#tutorial").hide();
+                }
+                toggled = !toggled;
+            };
+        })());
 		
 		
 		guiLayer.add(calsBurnedBackground);
