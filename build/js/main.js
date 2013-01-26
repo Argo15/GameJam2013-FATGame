@@ -33,8 +33,9 @@ var main = (function(){
 		createStage();
 		addBackground();
 		addGround();
-		addGameElements();
 		addGui();
+		addGameElements();
+		
 		startLoop();
 	}
 	
