@@ -5,110 +5,32 @@ var playerClass = (function(){
 	
 	function setupAnimations(){
 		
-		var w = 256;
-		var h = 256;
 		
 		animations = {
-			walking: [{
-				x: 0, 
-				y: 0,
-				width: w,
-				height: h,
-			}, {
-				x: 256, 
-				y: 0,
-				width: w,
-				height: h,
-			},
-			{
-				x: 512, 
-				y: 0,
-				width: w,
-				height: h,
-			},
-			{
-				x: 768, 
-				y: 0,
-				width: w,
-				height: h,
-			},
-			//256
-			{
-				x: 0, 
-				y: 256,
-				width: w,
-				height: h,
-			}, {
-				x: 256, 
-				y: 256,
-				width: w,
-				height: h,
-			},
-			{
-				x: 512, 
-				y: 256,
-				width: w,
-				height: h,
-			},
-			{
-				x: 768, 
-				y: 256,
-				width: w,
-				height: h,
-			},
-			//512
-			{
-				x: 0, 
-				y: 512,
-				width: w,
-				height: h,
-			}, {
-				x: 256, 
-				y: 512,
-				width: w,
-				height: h,
-			},
-			{
-				x: 512, 
-				y: 512,
-				width: w,
-				height: h,
-			},
-			{
-				x: 768, 
-				y: 512,
-				width: w,
-				height: h,
-			},
-			//768
-			{
-				x: 0, 
-				y: 768,
-				width: w,
-				height: h,
-			}, {
-				x: 256, 
-				y: 768,
-				width: w,
-				height: h,
-			},
-			{
-				x: 512, 
-				y: 768,
-				width: w,
-				height: h,
-			},
-			{
-				x: 768, 
-				y: 768,
-				width: w,
-				height: h,
-			},]
+			walking: getAnimationArray(16)
 		}
 		
 		return animations;
 	}
+
+    function getAnimationArray(maxFrames){
+        var frameArray = [];
+        for(var frame = 0; frame < maxFrames; frame++){
+            frameArray.push(getAnimationFrame(frame));
+        }
+        return frameArray;
+    }
 	
+    function getAnimationFrame(frame){
+        var x = (256 * (frame % 4));
+        var y = (256 * Math.floor(frame / 4));
+        return { 
+            x : x,
+            y : y,
+            width : 256,
+            height : 256
+        }
+    }
 	
 	
 	
